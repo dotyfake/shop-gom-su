@@ -1,0 +1,50 @@
+@import 'src/components/GlobalStyles/GlobalVariables';
+
+.wrapper {
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 0;
+    z-index: 69;
+    background-color: $bg-header-color;
+    box-shadow: 0px 1px 1px rgb(0 0 0 / 12%);
+    height: $header-height;
+    display: flex;
+    justify-content: center;
+
+    .header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+}
+
+.logo-img {
+    height: $header-height * 0.8;
+}
+
+.right {
+    text-align: center;
+    button {
+        color: $primary-color;
+        font-size: 1.6rem;
+        font-weight: 500;
+        border: none;
+        outline: none;
+        background-color: transparent;
+        cursor: pointer;
+        margin: 5px 0;
+
+        &:first-child {
+            margin-bottom: 10px;
+        }
+
+        &:hover {
+            text-shadow: 0px 0 1px #000;
+        }
+    }
+
+    svg {
+        font-size: 40px;
+    }
+}
