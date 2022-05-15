@@ -1,6 +1,5 @@
 import { Routes, Route } from 'react-router-dom';
-import { Home, News, LuxuryProducts, Contact } from '~/pages';
-import Products from '~/pages/Products/Products';
+import { Home, Products, News, LuxuryProducts, Contact } from '~/pages';
 
 const Container = () => {
     return (
