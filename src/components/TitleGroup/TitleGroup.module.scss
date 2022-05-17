@@ -1,0 +1,13 @@
+@import 'src/components/GlobalStyles/GlobalVariables';
+
+.title {
+    color: $primary-color;
+    font-family: 'Water Brush', cursive;
+    font-size: 4.2rem;
+    text-align: center;
+    margin-top: 30px;
+
+    .line {
+        height: 40px;
+    }
+}

@@ -1,0 +1,93 @@
+@import 'src/components/GlobalStyles/GlobalVariables';
+
+.info {
+    position: relative;
+    height: $default-height;
+    font-family: 'Water Brush', cursive;
+    font-size: 2.4rem;
+
+    .name {
+        margin-bottom: 5px;
+    }
+
+    .image {
+        filter: brightness(100%);
+        transform: scale(1);
+        transition: all 0.4s ease-out;
+    }
+
+    span {
+        position: absolute;
+        top: 0;
+        right: 20%;
+        display: inline-block;
+        padding: 4px;
+        font-family: 'Lato', sans-serif;
+        font-size: 1.3rem;
+        background-color: $primary-color;
+        color: $white-color;
+        border-radius: 6px;
+        opacity: 0.9;
+    }
+
+    &:hover .buy {
+        display: block;
+        transform: translateX(0);
+        opacity: 1;
+    }
+
+    &:focus .buy {
+        display: block;
+        transform: translateX(0);
+        opacity: 1;
+    }
+
+    &:hover .price {
+        opacity: 0;
+        left: -50px;
+    }
+    &:hover .image {
+        transform: scale(1.05);
+        filter: brightness(110%);
+    }
+}
+
+.desc {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+}
+
+.price-buy {
+    height: 60px;
+    position: relative;
+
+    .price {
+        position: absolute;
+        left: 0;
+        top: 0;
+        font-family: 'Lato', sans-serif;
+        font-size: 2rem;
+        opacity: 1;
+        transition: all 0.4s ease-out;
+    }
+
+    .buy {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 110px;
+        color: $white-color;
+        background-color: $primary-color;
+        border: none;
+        opacity: 0;
+        font-size: 2rem;
+        transition: all 0.4s ease-out;
+        cursor: pointer;
+        transform: translateX(-50px);
+    }
+
+    p {
+        margin: 0;
+    }
+}

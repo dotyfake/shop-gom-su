@@ -11,7 +11,7 @@ const cx = classNames.bind(styles);
 const Header = () => {
     return (
         <div className={cx('wrapper')}>
-            <div className="pc-wide">
+            <div className="wide">
                 <div className={cx('header')}>
                     <div className={cx('logo')}>
                         <a href="/">

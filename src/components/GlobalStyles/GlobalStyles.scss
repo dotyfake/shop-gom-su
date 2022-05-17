@@ -1,6 +1,7 @@
 @import 'normalize.css';
 @import './grid.css';
 @import url('https://fonts.googleapis.com/css2?family=Lato:wght@100;300;400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Water+Brush&display=swap');
 @import 'src/components/GlobalStyles/GlobalVariables';
 
 *,
@@ -17,8 +18,10 @@ html {
 
 body {
     font-size: 1.6rem;
-    line-height: 1.5;
+    // line-height: 1.5;
     text-rendering: optimizeSpeed;
+    margin: 0;
+    padding: 0;
 }
 
 a {
@@ -30,13 +33,25 @@ li {
 }
 
 .container {
-    margin-top: $header-height;
+    padding-top: $header-height + 30;
 }
 
 .container.minimize {
-    margin-top: $header-height - 20;
+    margin-top: $header-height - 10;
 }
 
-.pc-wide {
-    width: 1200px;
+.swiper-button-next,
+.swiper-button-prev {
+    width: 30px;
+    height: 30px;
+    border: solid $primary-color;
+    border-width: 0 3px 3px 0;
+    display: inline-block;
+    padding: 3px;
+    -webkit-transform: rotate(-45deg);
+}
+
+.swiper-button-prev {
+    transform: rotate(135deg);
+    -webkit-transform: rotate(135deg);
 }

@@ -1,0 +1,41 @@
+@import 'src/components/GlobalStyles/GlobalVariables';
+
+.swiper-slide {
+    height: $default-height;
+}
+
+.slide-item {
+    height: ($default-height / 3);
+    display: flex;
+    align-items: center;
+
+    &:not(:last-child) {
+        border-bottom: 1px #999 solid;
+    }
+
+    .slide-icon {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: $white-color;
+        width: 70px;
+        height: 70px;
+        border-radius: 50%;
+        font-size: 4rem;
+        background-color: $primary-color;
+    }
+}
+
+.slide-info {
+    margin-left: 10px;
+    width: 70%;
+    h3 {
+        font-size: 1.6rem;
+        color: $primary-color;
+        margin: 5px 0;
+    }
+    span {
+        font-size: 1.4rem;
+        color: #2e070e;
+    }
+}
