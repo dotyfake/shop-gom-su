@@ -1,11 +1,12 @@
 @import 'src/components/GlobalStyles/GlobalVariables';
 
 .wrapper {
-    width: 550px;
+    width: $width-search;
     height: 40px;
-    padding-left: 24px;
+    padding-left: 50px;
     border: 1px solid $primary-color;
     border-radius: 20px;
+    position: relative;
 
     &:focus-within {
         border: 2px solid $primary-color;
@@ -17,10 +18,11 @@
         align-items: center;
         flex-direction: row-reverse;
         height: 100%;
+
         input {
-            width: 440px;
+            width: $width-search - 100px;
             position: absolute;
-            left: 0;
+            left: -25px;
             top: 50%;
             transform: translateY(-50%);
             background-color: transparent;
@@ -35,7 +37,7 @@
 
         .type-writer {
             position: absolute;
-            left: 0;
+            left: -25px;
             top: 50%;
             transform: translateY(-50%);
             line-height: none;
@@ -56,5 +58,37 @@
                 padding: 0 16px;
             }
         }
+    }
+}
+
+.clear svg {
+    color: $primary-color;
+
+    &:hover {
+        color: rgb(187, 31, 31);
+    }
+}
+
+.box-result {
+    background-color: #fff;
+    box-shadow: rgb(0 0 0 / 12%) 0px 2px 12px;
+    border-radius: 4px;
+    width: $width-search;
+
+    .title,
+    .more {
+        text-align: center;
+        padding: 20px 10px 10px;
+        color: $primary-color;
+    }
+
+    .more:hover {
+        font-weight: 600;
+        background-color: $bg-header-color;
+    }
+
+    .more {
+        padding-bottom: 20px;
+        text-decoration: underline;
     }
 }

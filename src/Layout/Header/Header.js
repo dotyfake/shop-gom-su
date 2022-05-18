@@ -1,6 +1,8 @@
+import Tippy from '@tippyjs/react';
 import classNames from 'classnames/bind';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { solid } from '@fortawesome/fontawesome-svg-core/import.macro';
+import 'tippy.js/dist/tippy.css';
 
 import styles from './Header.module.scss';
 import Search from './components/Search/Search';
@@ -26,11 +28,13 @@ const Header = () => {
                         <div className={cx('login')}>
                             <button>Đăng nhập</button>
                         </div>
-                        <div className={cx('cart')}>
-                            <button>
-                                <FontAwesomeIcon icon={solid('basket-shopping')} />
-                            </button>
-                        </div>
+                        <Tippy content="Giỏ hàng" placement="bottom">
+                            <div className={cx('cart')}>
+                                <button>
+                                    <FontAwesomeIcon icon={solid('basket-shopping')} />
+                                </button>
+                            </div>
+                        </Tippy>
                     </div>
                 </div>
             </div>

@@ -91,3 +91,28 @@
         margin: 0;
     }
 }
+
+.product-search {
+    display: flex;
+    height: 100px;
+    width: 100%;
+
+    .search-info {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+
+        & > div {
+            color: $primary-color;
+        }
+
+        .search-name {
+            font-size: 2rem;
+        }
+    }
+
+    &:hover {
+        background-color: $bg-header-color;
+    }
+}

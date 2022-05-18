@@ -1,0 +1,44 @@
+@import 'src/components/GlobalStyles/GlobalVariables';
+
+.wrapper {
+    display: flex;
+    height: 450px;
+    padding-bottom: 100px;
+
+    .feed-item {
+        border: 2px solid #fff;
+        flex: 1;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        transition: 0.4s;
+
+        &:hover,
+        &:focus {
+            flex-grow: 4;
+        }
+    }
+
+    .img {
+        width: 90px;
+        height: 90px;
+        border-radius: 50%;
+        border: 2px solid #fff;
+        margin-bottom: 10px;
+    }
+
+    .desc {
+        background-color: $header-color-a;
+        width: 50%;
+        padding: 10px;
+        text-align: center;
+        border-radius: 6px;
+    }
+
+    h2,
+    p {
+        color: $primary-color;
+        text-align: center;
+    }
+}

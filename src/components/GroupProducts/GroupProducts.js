@@ -12,7 +12,7 @@ import { Navigation, Grid } from 'swiper';
 import styles from './GroupProducts.module.scss';
 import { Product } from '~/components';
 
-const GroupProducts = ({ typeGroup, name }) => {
+const GroupProducts = ({ typeGroup, name, row }) => {
     const cx = classNames.bind(styles);
     const groupProducts = typeGroup;
     return (
@@ -34,7 +34,7 @@ const GroupProducts = ({ typeGroup, name }) => {
                         clickable: true,
                     }}
                     grid={{
-                        rows: 2,
+                        rows: row,
                         fill: 'row',
                     }}
                     breakpoints={{

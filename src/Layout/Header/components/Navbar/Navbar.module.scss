@@ -1,8 +1,11 @@
 @import 'src/components/GlobalStyles/GlobalVariables';
 
+.nav-bar {
+}
 .nav-list {
     display: flex;
     margin: 0 auto 16px auto;
+    padding: 0;
 
     .nav-item {
         position: relative;

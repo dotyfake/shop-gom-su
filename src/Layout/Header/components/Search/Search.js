@@ -1,70 +1,130 @@
-import React, { useState } from 'react';
+import React, { useState, useContext, useRef } from 'react';
 import classNames from 'classnames/bind';
 import styles from './Search.module.scss';
 import TypeWriterEffect from 'react-typewriter-effect';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { solid } from '@fortawesome/fontawesome-svg-core/import.macro'; // <-- import styles to be used
-const cx = classNames.bind(styles);
+import { solid } from '@fortawesome/fontawesome-svg-core/import.macro';
+import Tippy from '@tippyjs/react';
+import HeadlessTippy from '@tippyjs/react/headless'; // different import path!
+import 'tippy.js/dist/tippy.css';
+import { Link } from 'react-router-dom';
+
+import { Product } from '~/components';
+import { ProviderContext } from '~/store';
+import { Products } from '~/pages';
 
 const Search = () => {
     const [typeWriter, setTypeWriter] = useState(true);
     const [clearSearch, setClearSearch] = useState(false);
+    const [visible, setVisible] = useState(false);
+    const [inputSearch, setInputSearch] = useState('');
+    const searchRef = useRef();
+    const { products, searchProducts, setSearchProducts } = useContext(ProviderContext);
+
+    const cx = classNames.bind(styles);
+    const searchResults = searchProducts.slice(0, 4);
+    const show = () => {
+        setVisible(true);
+    };
+    const hide = () => {
+        setVisible(false);
+    };
     return (
-        <div className={cx('wrapper')}>
-            <div className={cx('child')}>
-                <input
-                    type="text"
-                    onFocus={(e) => {
-                        setTypeWriter(false);
-                    }}
-                    onBlur={(e) => {
-                        e.target.value !== '' ? setTypeWriter(false) : setTypeWriter(true);
-                    }}
-                    onChange={(e) => {
-                        if (e.target.value !== '') {
-                            setClearSearch(true);
-                        } else {
-                            setClearSearch(false);
-                        }
-                    }}
-                />
-                {typeWriter && (
-                    <div className={cx(typeWriter && 'type-writer')}>
-                        <TypeWriterEffect
-                            textStyle={{
-                                fontFamily: 'Red Hat Display',
-                                color: '#07142e',
-                                fontWeight: 500,
-                                fontSize: '1.2em',
-                                opacity: 0.8,
-                            }}
-                            startDelay={2000}
-                            cursorColor="#3F3D56"
-                            multiText={[
-                                'Đĩa sâu lòng Lộc Lạc...',
-                                'Bát lục diệp...',
-                                'Bộ trà Hoàng gia...',
-                                'Bát cơm Lạc Hồng...',
-                                'Đĩa súp quốc sắc...',
-                            ]}
-                            multiTextDelay={1000}
-                            typeSpeed={30}
-                            multiTextLoop
-                        />
-                    </div>
-                )}
-                <div className={cx('buttons')}>
-                    {clearSearch && (
-                        <button className={cx('clear')}>
-                            <FontAwesomeIcon icon={solid('circle-xmark')} size="lg" />
-                        </button>
+        <HeadlessTippy
+            visible={visible}
+            interactive={true}
+            onClickOutside={hide}
+            placement="bottom"
+            render={(attrs) => (
+                <div className={cx('box-result')} tabIndex="-1" {...attrs}>
+                    <div className={cx('title')}>Kết quả tìm kiếm</div>
+                    {searchResults.map((item, i) => (
+                        <Product key={i} type="SEARCH_PRODUCT" props={item} />
+                    ))}
+                    <Link to="/products" element={<Products />}>
+                        <div className={cx('more')}>Xem thêm</div>
+                    </Link>
+                </div>
+            )}
+        >
+            <div className={cx('wrapper')}>
+                <div className={cx('child')}>
+                    <input
+                        type="text"
+                        ref={searchRef}
+                        value={inputSearch}
+                        onFocus={(e) => {
+                            show();
+                            setTypeWriter(false);
+                        }}
+                        onBlur={(e) => {
+                            e.target.value !== '' ? setTypeWriter(false) : setTypeWriter(true);
+                        }}
+                        onChange={(e) => {
+                            setInputSearch(e.target.value);
+                            if (e.target.value.length > 0) {
+                                setClearSearch(true);
+                            } else {
+                                setClearSearch(false);
+                            }
+
+                            if (e.nativeEvent.inputType === 'insertText' && e.target.value.length > 2) {
+                                const results = products.filter((product) =>
+                                    product.title.toUpperCase().includes(e.target.value.toUpperCase()),
+                                );
+                                setSearchProducts(results);
+                            }
+                            console.log(searchProducts);
+                        }}
+                    />
+
+                    {typeWriter && (
+                        <div className={cx(typeWriter && 'type-writer')}>
+                            <TypeWriterEffect
+                                textStyle={{
+                                    fontFamily: 'Red Hat Display',
+                                    color: '#07142e',
+                                    fontWeight: 500,
+                                    fontSize: '1.2em',
+                                    opacity: 0.8,
+                                }}
+                                startDelay={2000}
+                                cursorColor="#3F3D56"
+                                multiText={[
+                                    'Đĩa sâu lòng Lộc Lạc...',
+                                    'Bát lục diệp...',
+                                    'Bộ trà Hoàng gia...',
+                                    'Bát cơm Lạc Hồng...',
+                                    'Đĩa súp quốc sắc...',
+                                ]}
+                                multiTextDelay={1000}
+                                typeSpeed={30}
+                                multiTextLoop
+                            />
+                        </div>
                     )}
-                    <button className={cx('btn-search')}>
-                        <FontAwesomeIcon icon={solid('magnifying-glass')} size="lg" />
-                    </button>
+                    <div className={cx('buttons')}>
+                        {clearSearch && (
+                            <button
+                                className={cx('clear')}
+                                onClick={(e) => {
+                                    setInputSearch('');
+                                    setClearSearch(false);
+                                    searchRef.current.focus();
+                                }}
+                            >
+                                <FontAwesomeIcon icon={solid('circle-xmark')} size="lg" />
+                            </button>
+                        )}
+                        <Tippy content="Tìm kiếm" placement="right">
+                            <button className={cx('btn-search')}>
+                                <FontAwesomeIcon icon={solid('magnifying-glass')} size="lg" />
+                            </button>
+                        </Tippy>
+                    </div>
                 </div>
             </div>
-        </div>
+        </HeadlessTippy>
     );
 };
 
