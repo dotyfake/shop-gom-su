@@ -15,6 +15,11 @@ const Product = ({ type, props }) => {
                     style={{ background: `url(${images.productBg}) no-repeat center/ contain` }}
                 >
                     <div className={cx('info')}>
+                        <div className={cx('tags')}>
+                            {props.sale > 0 && <p className={cx('sale')}>{`-` + props.sale + `%`}</p>}
+                            {props.status.includes('New') && <p className={cx('new')}>New</p>}
+                            {props.status.includes('Hot') && <p className={cx('hot')}>Hot</p>}
+                        </div>
                         <div
                             className={cx('image')}
                             style={{
@@ -26,6 +31,7 @@ const Product = ({ type, props }) => {
                             <h4 className={cx('name')}>{props.title}</h4>
                             <div className={cx('price-buy')}>
                                 <p className={cx('price')}>{props.newPrice.toLocaleString()}đ</p>
+                                {props.sale > 0 && <p className={cx('old-price')}>{props.price.toLocaleString()}đ</p>}
                                 <button className={cx('buy')}>MUA NGAY</button>
                             </div>
                         </div>

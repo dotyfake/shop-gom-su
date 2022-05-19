@@ -3,7 +3,9 @@ import classNames from 'classnames/bind';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { solid } from '@fortawesome/fontawesome-svg-core/import.macro';
 import 'tippy.js/dist/tippy.css';
+import { Link } from 'react-router-dom';
 
+import { Home } from '~/pages';
 import styles from './Header.module.scss';
 import Search from './components/Search/Search';
 import Navbar from './components/Navbar/Navbar';
@@ -16,9 +18,9 @@ const Header = () => {
             <div className="wide">
                 <div className={cx('header')}>
                     <div className={cx('logo')}>
-                        <a href="/">
+                        <Link to="/" element={<Home />}>
                             <img className={cx('logo-img')} src={images.logo} alt="Logo" />
-                        </a>
+                        </Link>
                     </div>
                     <div className={cx('center')}>
                         <Navbar />

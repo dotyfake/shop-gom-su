@@ -7,7 +7,7 @@ import { solid } from '@fortawesome/fontawesome-svg-core/import.macro';
 import Tippy from '@tippyjs/react';
 import HeadlessTippy from '@tippyjs/react/headless'; // different import path!
 import 'tippy.js/dist/tippy.css';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 import { Product } from '~/components';
 import { ProviderContext } from '~/store';
@@ -19,8 +19,9 @@ const Search = () => {
     const [visible, setVisible] = useState(false);
     const [inputSearch, setInputSearch] = useState('');
     const searchRef = useRef();
-    const { products, searchProducts, setSearchProducts } = useContext(ProviderContext);
+    const { products, searchProducts, setSearchProducts, setProductsState } = useContext(ProviderContext);
 
+    let navigate = useNavigate();
     const cx = classNames.bind(styles);
     const searchResults = searchProducts.slice(0, 4);
     const show = () => {
@@ -29,6 +30,7 @@ const Search = () => {
     const hide = () => {
         setVisible(false);
     };
+
     return (
         <HeadlessTippy
             visible={visible}
@@ -37,13 +39,22 @@ const Search = () => {
             placement="bottom"
             render={(attrs) => (
                 <div className={cx('box-result')} tabIndex="-1" {...attrs}>
-                    <div className={cx('title')}>Kết quả tìm kiếm</div>
+                    {/* <div className={cx('title')}>Kết quả tìm kiếm</div> */}
                     {searchResults.map((item, i) => (
                         <Product key={i} type="SEARCH_PRODUCT" props={item} />
                     ))}
-                    <Link to="/products" element={<Products />}>
-                        <div className={cx('more')}>Xem thêm</div>
-                    </Link>
+                    {searchProducts.length > 4 && (
+                        <Link
+                            to="/products"
+                            element={<Products />}
+                            onClick={() => {
+                                hide();
+                                setProductsState(searchProducts);
+                            }}
+                        >
+                            <div className={cx('more')}>Xem thêm</div>
+                        </Link>
+                    )}
                 </div>
             )}
         >
@@ -54,14 +65,21 @@ const Search = () => {
                         ref={searchRef}
                         value={inputSearch}
                         onFocus={(e) => {
-                            show();
                             setTypeWriter(false);
                         }}
                         onBlur={(e) => {
                             e.target.value !== '' ? setTypeWriter(false) : setTypeWriter(true);
                         }}
+                        onKeyPress={(e) => {
+                            if (e.key === 'Enter') {
+                                setProductsState(searchProducts);
+                                hide();
+                                navigate('/products');
+                            }
+                        }}
                         onChange={(e) => {
                             setInputSearch(e.target.value);
+                            console.log(e.nativeEvent.inputType);
                             if (e.target.value.length > 0) {
                                 setClearSearch(true);
                             } else {
@@ -69,12 +87,14 @@ const Search = () => {
                             }
 
                             if (e.nativeEvent.inputType === 'insertText' && e.target.value.length > 2) {
+                                show();
                                 const results = products.filter((product) =>
                                     product.title.toUpperCase().includes(e.target.value.toUpperCase()),
                                 );
                                 setSearchProducts(results);
+                            } else if (e.nativeEvent.inputType === 'deleteContentBackward') {
+                                hide();
                             }
-                            console.log(searchProducts);
                         }}
                     />
 
@@ -98,8 +118,7 @@ const Search = () => {
                                     'Đĩa súp quốc sắc...',
                                 ]}
                                 multiTextDelay={1000}
-                                typeSpeed={30}
-                                multiTextLoop
+                                typeSpeed={50}
                             />
                         </div>
                     )}
@@ -108,6 +127,7 @@ const Search = () => {
                             <button
                                 className={cx('clear')}
                                 onClick={(e) => {
+                                    hide();
                                     setInputSearch('');
                                     setClearSearch(false);
                                     searchRef.current.focus();
@@ -117,9 +137,17 @@ const Search = () => {
                             </button>
                         )}
                         <Tippy content="Tìm kiếm" placement="right">
-                            <button className={cx('btn-search')}>
-                                <FontAwesomeIcon icon={solid('magnifying-glass')} size="lg" />
-                            </button>
+                            <Link to="/Products" element={<Products />}>
+                                <button
+                                    className={cx('btn-search')}
+                                    onClick={() => {
+                                        hide();
+                                        setProductsState(searchProducts);
+                                    }}
+                                >
+                                    <FontAwesomeIcon icon={solid('magnifying-glass')} size="lg" />
+                                </button>
+                            </Link>
                         </Tippy>
                     </div>
                 </div>

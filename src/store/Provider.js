@@ -5,6 +5,7 @@ const Provider = ({ children }) => {
     const [products, setProducts] = useState([]);
     const [product, setProduct] = useState({});
     const [searchProducts, setSearchProducts] = useState([]);
+    const [productsState, setProductsState] = useState([]);
 
     useEffect(() => {
         axios('/.netlify/functions/ProductsAPI').then((res) => {
@@ -29,7 +30,17 @@ const Provider = ({ children }) => {
         });
     }, []);
     return (
-        <Context.Provider value={{ products, product, setProduct, searchProducts, setSearchProducts }}>
+        <Context.Provider
+            value={{
+                products,
+                product,
+                setProduct,
+                searchProducts,
+                setSearchProducts,
+                productsState,
+                setProductsState,
+            }}
+        >
             {children}
         </Context.Provider>
     );

@@ -6,6 +6,35 @@
     font-family: 'Water Brush', cursive;
     font-size: 2.4rem;
 
+    .tags {
+        position: absolute;
+        right: 60px;
+        top: 40px;
+        width: 1px;
+        z-index: 10;
+    }
+    .sale,
+    .new,
+    .hot {
+        width: 46px;
+        margin: 2px 0;
+        background-color: goldenrod;
+        color: #fff;
+        border-radius: 5px;
+        padding: 2px 2px;
+        font-family: 'Lato', sans-serif;
+        font-size: 1.7rem;
+        text-align: center;
+        line-height: 1.7rem;
+    }
+
+    .new {
+        background-color: rgb(12, 133, 174);
+    }
+    .hot {
+        background-color: #c41667;
+    }
+
     .name {
         margin-bottom: 5px;
     }
@@ -46,6 +75,11 @@
         opacity: 0;
         left: -50px;
     }
+
+    &:hover .old-price {
+        opacity: 0;
+        left: -50px;
+    }
     &:hover .image {
         transform: scale(1.05);
         filter: brightness(110%);
@@ -72,11 +106,22 @@
         transition: all 0.4s ease-out;
     }
 
+    .old-price {
+        position: absolute;
+        left: 4px;
+        top: 24px;
+        font-family: 'Lato', sans-serif;
+        font-size: 1.5rem;
+        text-decoration-line: line-through;
+        opacity: 1;
+        transition: all 0.4s ease-out;
+    }
+
     .buy {
         position: absolute;
         left: 0;
         top: 0;
-        width: 110px;
+        width: 120px;
         color: $white-color;
         background-color: $primary-color;
         border: none;

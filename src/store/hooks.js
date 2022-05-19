@@ -11,8 +11,3 @@ export const useGetProducts = (type) => {
         return result;
     }
 };
-
-// export const useIncreaseView = (id) => {
-//     const state = useContext(Context);
-
-// };

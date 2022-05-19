@@ -1,4 +1,4 @@
-import { Header, Container } from '~/Layout';
+import { Header, Container, Footer } from '~/Layout';
 import images from '~/assets/images/';
 
 function App() {
@@ -6,6 +6,7 @@ function App() {
         <div className="App" style={{ background: `url(${images.bg}) center/ cover` }}>
             <Header />
             <Container />
+            <Footer />
         </div>
     );
 }

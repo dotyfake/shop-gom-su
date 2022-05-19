@@ -14,6 +14,13 @@ const images = {
     r2: require('~/assets/images/feedback/r2.jpg'),
     r3: require('~/assets/images/feedback/r3.jpg'),
     r4: require('~/assets/images/feedback/r4.jpg'),
+    dia: require('~/assets/images/products/dia.jpg'),
+    chen: require('~/assets/images/products/chen.jpg'),
+    bat: require('~/assets/images/products/bat.jpg'),
+    au: require('~/assets/images/products/au.jpg'),
+    binh: require('~/assets/images/products/binh.jpg'),
+    am: require('~/assets/images/products/am.jpg'),
+    all: require('~/assets/images/products/all.jpg'),
 };
 
 export default images;
