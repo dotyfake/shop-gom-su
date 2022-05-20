@@ -18,7 +18,7 @@
     .hot {
         width: 46px;
         margin: 2px 0;
-        background-color: goldenrod;
+        background-color: $yellow;
         color: #fff;
         border-radius: 5px;
         padding: 2px 2px;
@@ -29,10 +29,10 @@
     }
 
     .new {
-        background-color: rgb(12, 133, 174);
+        background-color: $primary-color;
     }
     .hot {
-        background-color: #c41667;
+        background-color: $red;
     }
 
     .name {

@@ -1,3 +1,4 @@
+import { useState, useEffect } from 'react';
 import Tippy from '@tippyjs/react';
 import classNames from 'classnames/bind';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -13,8 +14,16 @@ import images from '~/assets/images/';
 
 const cx = classNames.bind(styles);
 const Header = () => {
+    const [minimizeHeader, setMinimizeHeader] = useState(false);
+
+    useEffect(() => {
+        const handleMinimize = () => {
+            setMinimizeHeader(window.scrollY > 100);
+        };
+        window.addEventListener('scroll', handleMinimize);
+    }, []);
     return (
-        <div className={cx('wrapper')}>
+        <div className={cx('wrapper', { minimize: minimizeHeader })}>
             <div className="wide">
                 <div className={cx('header')}>
                     <div className={cx('logo')}>
@@ -24,7 +33,7 @@ const Header = () => {
                     </div>
                     <div className={cx('center')}>
                         <Navbar />
-                        <Search />
+                        <Search mini={minimizeHeader} />
                     </div>
                     <div className={cx('right')}>
                         <div className={cx('login')}>

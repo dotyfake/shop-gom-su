@@ -57,6 +57,14 @@
     display: flex;
     .best-img {
         transition: all 0.4s ease-in-out;
+        position: relative;
+        .link {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+        }
     }
     .best-info {
         h3 {

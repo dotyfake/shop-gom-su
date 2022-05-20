@@ -13,7 +13,7 @@ import { Product } from '~/components';
 import { ProviderContext } from '~/store';
 import { Products } from '~/pages';
 
-const Search = () => {
+const Search = (mini) => {
     const [typeWriter, setTypeWriter] = useState(true);
     const [clearSearch, setClearSearch] = useState(false);
     const [visible, setVisible] = useState(false);
@@ -58,7 +58,7 @@ const Search = () => {
                 </div>
             )}
         >
-            <div className={cx('wrapper')}>
+            <div className={cx('wrapper', { hide: mini })}>
                 <div className={cx('child')}>
                     <input
                         type="text"

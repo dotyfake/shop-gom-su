@@ -104,6 +104,7 @@ const Products = () => {
                                     <select
                                         value={select}
                                         onChange={(e) => {
+                                            setOptionsType('');
                                             setSelected(e.target.value);
                                             loadSelect(e.target.value);
                                         }}

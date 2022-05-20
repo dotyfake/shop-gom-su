@@ -1,10 +1,14 @@
-import React from 'react';
 import classNames from 'classnames/bind';
 import styles from './BestProducts.module.scss';
 import images from '~/assets/images';
 import { useGetProducts } from '~/store';
+import { Link } from 'react-router-dom';
+import { ProductPage } from '~/pages';
+import { useContext } from 'react';
+import { ProviderContext } from '~/store';
 
 const BestProducts = () => {
+    const { setProduct, setWatched } = useContext(ProviderContext);
     const bestProducts = useGetProducts('Best');
     const fixProducts = bestProducts && bestProducts.slice(0, 6);
     const cx = classNames.bind(styles);
@@ -22,9 +26,28 @@ const BestProducts = () => {
                                         background: `url(${product.imageThumb}) no-repeat center/ contain`,
                                         paddingLeft: '60%',
                                     }}
-                                ></div>
+                                >
+                                    <Link
+                                        className={cx('link')}
+                                        to="/productPage"
+                                        element={<ProductPage />}
+                                        onClick={() => {
+                                            setProduct(product);
+                                            setWatched(product);
+                                        }}
+                                    ></Link>
+                                </div>
                                 <div className={cx('best-info')}>
-                                    <h3>{product.title}</h3>
+                                    <Link
+                                        to="/productPage"
+                                        element={<ProductPage />}
+                                        onClick={() => {
+                                            setProduct(product);
+                                            setWatched(product);
+                                        }}
+                                    >
+                                        <h3>{product.title}</h3>
+                                    </Link>
                                     <p>{product.newPrice.toLocaleString()} vnđ</p>
                                     <p>{product.desc}</p>
                                 </div>

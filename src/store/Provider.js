@@ -4,6 +4,8 @@ import axios from 'axios';
 const Provider = ({ children }) => {
     const [products, setProducts] = useState([]);
     const [product, setProduct] = useState({});
+    const [watched, setWatched] = useState([]);
+    const [cart, setCart] = useState([]);
     const [searchProducts, setSearchProducts] = useState([]);
     const [productsState, setProductsState] = useState([]);
 
@@ -14,6 +16,7 @@ const Provider = ({ children }) => {
                 const fixDesc = item.properties.Title.rich_text.map((item) => item.plain_text);
                 return {
                     title: fixDesc.join(''),
+                    id: item.id,
                     desc: item.properties.Description.rich_text[0].plain_text,
                     price: item.properties.Price.number,
                     newPrice: item.properties.NewPrice.formula.number,
@@ -39,6 +42,10 @@ const Provider = ({ children }) => {
                 setSearchProducts,
                 productsState,
                 setProductsState,
+                watched,
+                setWatched,
+                cart,
+                setCart,
             }}
         >
             {children}
