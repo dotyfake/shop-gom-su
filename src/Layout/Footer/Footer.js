@@ -20,7 +20,7 @@ const Footer = () => {
                             title="page"
                             src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2FG%25E1%25BB%2591m-nh%25C3%25A0-Khu%25C3%25AA-My-106591728105268&tabs&width=260&height=130&small_header=false&adapt_container_width=true&hide_cover=false&show_facepile=true&appId=5147914965295677"
                             width="260"
-                            height="130"
+                            height="110"
                             style={{ border: 'none', overflow: 'hidden' }}
                             scrolling="no"
                             frameBorder="0"
@@ -40,8 +40,31 @@ const Footer = () => {
                         ></iframe>
                     </div>
                 </div>
-                <div className="col l-3 m-12 c-12"></div>
-                <div className="col l-3 m-12 c-12"></div>
+                <div className="col l-3 m-12 c-12">
+                    <p style={{ margin: '0' }}>Địa chỉ: Vùng tối của mặt trăng, Mặt trăng</p>
+                    <p>Số điện thoại: 7749</p>
+                    <p>Số fax: 4953</p>
+                    <p>Email: mailmeow@meow.meow</p>
+                    <p>
+                        Website:
+                        <a href="gomsu.tk"> Gốm nhà Khuê My</a>
+                    </p>
+                </div>
+                <div className="col l-3 m-12 c-12">
+                    <ul style={{ margin: '0' }}>
+                        <li>
+                            <strong>Gốm sứ chất lượng cao</strong>
+                            <p>Quy trình sản xuất đạt tiêu chuẩn</p>
+                        </li>
+                        <li>
+                            <strong>Mua hàng(T2-CN)</strong>
+                            <p>Mở cửa tất cả các ngày trong tuần!</p>
+                        </li>
+                        <li>
+                            <strong>Miễn phí giao hàng</strong>
+                        </li>
+                    </ul>
+                </div>
                 <div className="col l-3 m-12 c-12">
                     <div className={cx('f4')}>
                         <img src={images.logo} alt="logo" className={cx('logo')} />

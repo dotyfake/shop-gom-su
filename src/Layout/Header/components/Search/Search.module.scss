@@ -1,69 +1,68 @@
 @import 'src/components/GlobalStyles/GlobalVariables';
 
 .wrapper {
-    width: $width-search;
-    height: 40px;
-    padding-left: 50px;
-    border: 1px solid $primary-color;
-    border-radius: 20px;
-    position: relative;
+    flex: 1;
 
-    &:focus-within {
-        border: 2px solid $primary-color;
-    }
-    // overflow: hidden;
-    .child {
+    .search-box {
+        width: $width-search;
+        height: 40px;
+        padding-left: 50px;
+        border: 1px solid $primary-color;
+        border-radius: 20px;
         position: relative;
-        display: flex;
-        align-items: center;
-        flex-direction: row-reverse;
-        height: 100%;
-
-        input {
-            width: $width-search - 100px;
-            position: absolute;
-            left: -25px;
-            top: 50%;
-            transform: translateY(-50%);
-            background-color: transparent;
-            z-index: 2;
-            border: none;
-            outline: none;
-            font-family: 'Red Hat Display';
-            color: $primary-color;
-            font-weight: 500;
-            font-size: 1.2em;
+        &:focus-within {
+            border: 2px solid $primary-color;
         }
-
-        .type-writer {
-            position: absolute;
-            left: -25px;
-            top: 50%;
-            transform: translateY(-50%);
-            line-height: none;
-        }
-
-        .buttons {
+        // overflow: hidden;
+        .child {
+            position: relative;
             display: flex;
             align-items: center;
+            flex-direction: row-reverse;
+            height: 100%;
 
-            button {
+            input {
+                width: $width-search - 100px;
+                position: absolute;
+                left: -25px;
+                top: 50%;
+                transform: translateY(-50%);
                 background-color: transparent;
+                z-index: 2;
                 border: none;
-                cursor: pointer;
+                outline: none;
+                font-family: 'Red Hat Display';
+                color: $primary-color;
+                font-weight: 500;
+                font-size: 1.2em;
             }
 
-            .btn-search {
-                border-left: 1px solid $primary-color;
-                padding: 0 16px;
+            .type-writer {
+                position: absolute;
+                left: -25px;
+                top: 50%;
+                transform: translateY(-50%);
+                line-height: none;
+            }
+
+            .buttons {
+                display: flex;
+                align-items: center;
+
+                button {
+                    background-color: transparent;
+                    border: none;
+                    cursor: pointer;
+                }
+
+                .btn-search {
+                    border-left: 1px solid $primary-color;
+                    padding: 0 16px;
+                }
             }
         }
     }
 }
-
-// .wrapper.hide {
-//     display: none;
-// }
 
 .clear svg {
     color: $primary-color;

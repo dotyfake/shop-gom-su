@@ -1,5 +1,5 @@
 import classNames from 'classnames/bind';
-import { useContext, useEffect, useState } from 'react';
+import { useContext, useEffect, useState, useRef } from 'react';
 import { ProviderContext } from '~/store';
 
 import { Product } from '~/components';
@@ -22,6 +22,11 @@ const Products = () => {
     const { products, productsState, setProductsState } = useContext(ProviderContext);
     const [optionsType, setOptionsType] = useState('');
     const [select, setSelected] = useState('');
+    const [loadPage, setLoadPage] = useState(20);
+    const [endProducts, setEndProducts] = useState(false);
+    const productsRef = useRef();
+
+    const newProductsState = productsState.slice(0, loadPage);
     const loadProducts = () => {
         setProductsState(productsState);
     };
@@ -67,19 +72,32 @@ const Products = () => {
 
     useEffect(loadProducts, [products]);
 
+    useEffect(() => {
+        const trackScrolling = () => {
+            if (productsRef.current.getBoundingClientRect().bottom <= window.innerHeight) {
+                setLoadPage((prev) => prev + 4);
+                loadPage >= newProductsState.length ? setEndProducts(true) : setEndProducts(false);
+            }
+        };
+        window.addEventListener('scroll', trackScrolling);
+        return () => window.removeEventListener('scroll', trackScrolling);
+    });
+
     return (
         <div className={cx('wrapper', { active: true })}>
             <div className="wide">
                 <div className="row">
-                    <div className="col l-2">
-                        <aside className={cx('side-bar')}>
-                            <h3>Loại sản phẩm</h3>
-                            <div className="row.no-gutters">
-                                <div className="col l-12">
+                    <div className={cx('col l-12', 'content')}>
+                        <div className="row">
+                            <div className={cx('col l-12', [styles.tags])}>
+                                <aside className={cx('side-bar')}>
+                                    {/* <h3>Loại sản phẩm</h3> */}
                                     {optionsProducts.map((product, i) => (
                                         <div
                                             key={i}
-                                            className={cx('options-item', { active: optionsType === product.name })}
+                                            className={cx('options-item', {
+                                                active: optionsType === product.name,
+                                            })}
                                             onClick={() => optionType(product.name)}
                                         >
                                             <div
@@ -91,43 +109,41 @@ const Products = () => {
                                             <h4>{product.name}</h4>
                                         </div>
                                     ))}
+                                </aside>
+                                <div className={cx('select-filter')}>
+                                    <h4>Sản phẩm {!!select && ` - ` + select}</h4>
+                                    <div className={cx('filter')}>
+                                        Lọc sản phẩm theo
+                                        <select
+                                            className={cx('select-box')}
+                                            value={select}
+                                            onChange={(e) => {
+                                                setOptionsType('');
+                                                setSelected(e.target.value);
+                                                loadSelect(e.target.value);
+                                            }}
+                                        >
+                                            <option value="Tất cả sản phẩm">Tất cả sản phẩm</option>
+                                            <option value="Giá: Thấp đến Cao">Giá: Thấp đến Cao </option>
+                                            <option value="Giá: Cao đến thấp">Giá: Cao đến thấp</option>
+                                            <option value="Bán chạy">Bán chạy</option>
+                                            <option value="Mới nhất">Mới nhất</option>
+                                            <option value="Đang khuyến mãi">Đang khuyến mãi</option>
+                                            <option value="Gốm sứ cao cấp">Gốm sứ cao cấp</option>
+                                        </select>
+                                    </div>
                                 </div>
                             </div>
-                        </aside>
-                    </div>
-                    <div className={cx('col l-10', 'content')}>
-                        <div className="row">
-                            <div className={cx('col l-12', [styles.tags])}>
-                                <h2>Sản phẩm {!!select && ` - ` + select}</h2>
-                                <div className={cx('filter')}>
-                                    Lọc sản phẩm theo
-                                    <select
-                                        value={select}
-                                        onChange={(e) => {
-                                            setOptionsType('');
-                                            setSelected(e.target.value);
-                                            loadSelect(e.target.value);
-                                        }}
-                                    >
-                                        <option value="Tất cả sản phẩm">Tất cả sản phẩm</option>
-                                        <option value="Giá: Thấp đến Cao">Giá: Thấp đến Cao </option>
-                                        <option value="Giá: Cao đến thấp">Giá: Cao đến thấp</option>
-                                        <option value="Bán chạy">Bán chạy</option>
-                                        <option value="Mới nhất">Mới nhất</option>
-                                        <option value="Đang khuyến mãi">Đang khuyến mãi</option>
-                                        <option value="Gốm sứ cao cấp">Gốm sứ cao cấp</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div className={cx('col l-12', [styles.products])}>
+                            <div className={cx('col l-12', [styles.products])} ref={productsRef}>
                                 <div className="row">
                                     {productsState.length > 0 &&
-                                        productsState.map((product, i) => (
+                                        newProductsState.map((product, i) => (
                                             <div key={i} className="col l-3 m-6 c-6">
                                                 <Product type="DEFAULT_PRODUCT" props={product} />
                                             </div>
                                         ))}
                                 </div>
+                                {endProducts && <h4 className={cx('end')}>Không còn sản phẩm nào</h4>}
                             </div>
                         </div>
                     </div>

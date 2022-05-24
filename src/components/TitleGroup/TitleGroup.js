@@ -4,14 +4,17 @@ import styles from './TitleGroup.module.scss';
 
 const cx = classNames.bind(styles);
 
-const TitleGroup = ({ title }) => {
+const TitleGroup = ({ title, noMargin }) => {
     return (
         <div className={cx('title')}>
             <div className="wide">
-                {title}
+                <h3 style={{ margin: '0' }}>{title}</h3>
                 <div
                     className={cx('line')}
-                    style={{ background: `url(${images.line}) no-repeat center/ contain` }}
+                    style={{
+                        background: `url(${images.line}) no-repeat center/ contain`,
+                        marginBottom: `${noMargin && '0'}`,
+                    }}
                 ></div>
             </div>
         </div>

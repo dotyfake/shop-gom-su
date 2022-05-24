@@ -23,7 +23,7 @@ const Header = () => {
         window.addEventListener('scroll', handleMinimize);
     }, []);
     return (
-        <div className={cx('wrapper', { minimize: minimizeHeader })}>
+        <div className={cx({ wrapper: !minimizeHeader }, { minimize: minimizeHeader })}>
             <div className="wide">
                 <div className={cx('header')}>
                     <div className={cx('logo')}>
@@ -36,7 +36,7 @@ const Header = () => {
                         <Search mini={minimizeHeader} />
                     </div>
                     <div className={cx('right')}>
-                        <div className={cx('login')}>
+                        <div className={minimizeHeader ? 'hide' : 'login'}>
                             <button>Đăng nhập</button>
                         </div>
                         <Tippy content="Giỏ hàng" placement="bottom">

@@ -13,6 +13,10 @@ const BestProducts = () => {
     const fixProducts = bestProducts && bestProducts.slice(0, 6);
     const cx = classNames.bind(styles);
 
+    const goToTop = () => {
+        window.scroll(0, 0);
+    };
+
     return (
         <div className="wide">
             <div className={cx('container1')}>
@@ -32,8 +36,16 @@ const BestProducts = () => {
                                         to="/productPage"
                                         element={<ProductPage />}
                                         onClick={() => {
-                                            setProduct(product);
-                                            setWatched(product);
+                                            setProduct(() => {
+                                                localStorage.setItem('product', JSON.stringify(product.id));
+                                                return product.id;
+                                            });
+                                            setWatched((prev) => {
+                                                const newWatched = [...new Set([...prev, product.id])];
+                                                localStorage.setItem('watched', JSON.stringify(newWatched));
+                                                return newWatched;
+                                            });
+                                            goToTop();
                                         }}
                                     ></Link>
                                 </div>
@@ -42,8 +54,16 @@ const BestProducts = () => {
                                         to="/productPage"
                                         element={<ProductPage />}
                                         onClick={() => {
-                                            setProduct(product);
-                                            setWatched(product);
+                                            setProduct(() => {
+                                                localStorage.setItem('product', JSON.stringify(product.id));
+                                                return product.id;
+                                            });
+                                            setWatched((prev) => {
+                                                const newWatched = [...new Set([...prev, product.id])];
+                                                localStorage.setItem('watched', JSON.stringify(newWatched));
+                                                return newWatched;
+                                            });
+                                            goToTop();
                                         }}
                                     >
                                         <h3>{product.title}</h3>

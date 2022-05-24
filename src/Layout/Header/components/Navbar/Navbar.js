@@ -15,7 +15,9 @@ const navItems = [
 
 const Navbar = () => {
     const { products, setProductsState } = useContext(ProviderContext);
-
+    const goToTop = () => {
+        window.scroll(0, 0);
+    };
     return (
         <div className={cx('nav-bar')}>
             <nav>
@@ -30,6 +32,7 @@ const Navbar = () => {
                                 } else if (item.name === 'Gốm sứ cao cấp') {
                                     setProductsState(products.filter((item) => item.status.includes('Luxury Product')));
                                 }
+                                goToTop();
                             }}
                         >
                             <Link to={item.path}>{item.name}</Link>

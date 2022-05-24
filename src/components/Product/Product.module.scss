@@ -38,6 +38,10 @@
     .name {
         margin-bottom: 5px;
     }
+    .name.watched {
+        margin: 0 0 60px 40px;
+        text-align: center;
+    }
 
     .image {
         filter: brightness(100%);

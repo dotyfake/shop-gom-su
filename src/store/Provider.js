@@ -3,8 +3,12 @@ import { useState, useEffect } from 'react';
 import axios from 'axios';
 const Provider = ({ children }) => {
     const [products, setProducts] = useState([]);
-    const [product, setProduct] = useState({});
-    const [watched, setWatched] = useState([]);
+    const [product, setProduct] = useState(() => {
+        return JSON.parse(localStorage.product ?? `[]`);
+    });
+    const [watched, setWatched] = useState(() => {
+        return JSON.parse(localStorage.watched ?? '[]');
+    });
     const [cart, setCart] = useState([]);
     const [searchProducts, setSearchProducts] = useState([]);
     const [productsState, setProductsState] = useState([]);
@@ -12,6 +16,7 @@ const Provider = ({ children }) => {
     useEffect(() => {
         axios('/.netlify/functions/ProductsAPI').then((res) => {
             const db = res.data.results;
+            console.log(db);
             const data = db.map((item) => {
                 const fixDesc = item.properties.Title.rich_text.map((item) => item.plain_text);
                 return {
