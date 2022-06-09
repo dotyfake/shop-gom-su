@@ -16,13 +16,19 @@ const Home = () => {
             <TitleGroup title="Sản phẩm mới" noMargin />
             <GroupProducts typeGroup={useGetProducts('New')} name="NewProducts" row={2} />
             <TitleGroup title="Sản phẩm bán chạy" />
-            <GroupProducts typeGroup={useGetProducts('Hot')} name="HotProducts" row={1} />
+            <GroupProducts
+                typeGroup={useGetProducts('Hot')}
+                name="HotProducts"
+                row={1}
+                loop
+                autoplay={{ delay: 1000, disableOnInteraction: false }}
+            />
             <TitleGroup title="Sản phẩm tiêu biểu" />
             <BestProducts />
             <TitleGroup title="Phản hồi từ khách hàng" />
             <Feedback />
             <TitleGroup title="Về chúng tôi" />
-            <ContactElement />
+            {/* <ContactElement /> */}
         </div>
     );
 };

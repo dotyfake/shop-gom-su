@@ -52,6 +52,10 @@
         top: 50%;
         transform: translateY(-50%);
     }
+
+    .transformX {
+        transform: translate(-40%, -50%);
+    }
 }
 
 .center {
@@ -65,27 +69,92 @@
 }
 
 .right {
-    text-align: center;
-    button {
-        color: $primary-color;
-        font-size: 1.6rem;
-        font-weight: 500;
-        border: none;
-        outline: none;
-        background-color: transparent;
-        cursor: pointer;
-        margin: 5px 0;
-
-        &:first-child {
-            margin-bottom: 10px;
-        }
-
-        &:hover {
-            text-shadow: 0px 0 1px #000;
+    .cart {
+        & > button {
+            color: $primary-color;
+            background-color: transparent;
+            border: none;
+            outline: none;
+            cursor: pointer;
         }
     }
 
-    svg {
-        font-size: 40px;
+    .cart-result {
+        position: relative;
+        width: 400px;
+        height: 100%;
+        background-color: #fff;
+        box-shadow: rgb(0 0 0 / 12%) 0px 2px 12px;
+        .empty-cart {
+            text-align: center;
+            color: $text-color;
+            font-weight: 600;
+            font-size: 1.6rem;
+            padding: 40px;
+            padding-top: 20px;
+        }
+    }
+    .cart-icon {
+        position: relative;
+        span {
+            position: absolute;
+            right: 0;
+            background-color: $red;
+            color: $white-color;
+            padding: 1px 5px;
+            border-radius: 30%;
+        }
+        & > svg {
+            font-size: 40px;
+        }
+    }
+    .title {
+        color: $text-color;
+        text-align: center;
+        padding-top: 10px;
+        font-size: 2rem;
+    }
+
+    .list-product {
+        max-height: 80%;
+        overflow-y: auto;
+
+        &::-webkit-scrollbar {
+            width: 12px; /* width of the entire scrollbar */
+        }
+        &::-webkit-scrollbar-track {
+            background: $white-color; /* color of the tracking area */
+        }
+        &::-webkit-scrollbar-thumb {
+            background-color: $primary-color; /* color of the scroll thumb */
+            border-radius: 20px; /* roundness of the scroll thumb */
+            border: 3px solid $white-color; /* creates padding around scroll thumb */
+        }
+    }
+}
+
+.cart-footer {
+    width: 100%;
+    margin: 0 auto;
+    position: absolute;
+    bottom: 0;
+    padding: 10px;
+    button {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 50%;
+        height: 46px;
+        font-size: 1.6rem;
+        border: none;
+        padding: 10px;
+        background-color: $primary-color;
+        color: $white-color;
+        margin: 5px auto;
+        cursor: pointer;
+
+        &:hover {
+            filter: brightness(110%);
+        }
     }
 }

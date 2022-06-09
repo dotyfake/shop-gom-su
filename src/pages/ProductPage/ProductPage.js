@@ -1,5 +1,5 @@
 import classNames from 'classnames/bind';
-import { useContext, useState, useEffect } from 'react';
+import { useContext, useState, useEffect, useRef } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Zoom, Navigation } from 'swiper';
 
@@ -11,6 +11,7 @@ import 'swiper/css/thumbs';
 import styles from './ProductPage.module.scss';
 import { ProviderContext } from '~/store';
 import { Product } from '~/components';
+import { useToast } from '~/store';
 
 const cx = classNames.bind(styles);
 
@@ -28,11 +29,14 @@ const ProductPage = () => {
     const [newWatched, setNewWatched] = useState(handleSetWatched);
     const [newProduct, setNewProduct] = useState(handleSetProduct);
     const [counter, setCounter] = useState(1);
+    const prevClick = useRef(0);
+    const toast = useToast({ newProduct, prevClick: prevClick.current, counter });
 
     useEffect(() => setNewProduct(handleSetProduct), [product]);
 
     return (
         <div className="wrapper">
+            {useToast(prevClick)}
             <div className="wide">
                 {newProduct && (
                     <div className="row">
@@ -85,7 +89,9 @@ const ProductPage = () => {
                                 </button>
                             </div>
 
-                            <button className={cx('buy')}>CHỌN MUA</button>
+                            <button ref={prevClick} className={cx('buy')} onClick={toast.props.show}>
+                                CHỌN MUA
+                            </button>
                         </div>
                         <div className={cx('col l-12', [styles.infoProduct])}>
                             <h3>Thông tin về sản phẩm</h3>

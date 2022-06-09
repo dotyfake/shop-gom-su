@@ -38,7 +38,6 @@ const News = () => {
             setNewsList(data);
         });
     }, []);
-    console.log(loadNews, newsList.length);
 
     useEffect(() => {
         const trackScrolling = () => {

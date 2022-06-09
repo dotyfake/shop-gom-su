@@ -13,8 +13,8 @@ import images from '~/assets/images/';
 const [slideA, slideB] = images.slide;
 const cx = classNames.bind(styles);
 const arrSlide = [
-    { title: 'abc', description: 'xyz', path: slideA },
-    { title: 'xyz', description: 'def', path: slideB },
+    { title: '', description: 'xyz', path: slideA },
+    { title: '', description: 'def', path: slideB },
 ];
 
 const arrSlideRight = [

@@ -42,8 +42,8 @@ const Footer = () => {
                 </div>
                 <div className="col l-3 m-12 c-12">
                     <p style={{ margin: '0' }}>Địa chỉ: Vùng tối của mặt trăng, Mặt trăng</p>
-                    <p>Số điện thoại: 7749</p>
-                    <p>Số fax: 4953</p>
+                    <p>Số điện thoại: 9966</p>
+                    <p>Số fax: 6699</p>
                     <p>Email: mailmeow@meow.meow</p>
                     <p>
                         Website:

@@ -1,3 +1,5 @@
+@import 'src/components/GlobalStyles/GlobalVariables';
+
 .bg {
     display: flex;
     justify-content: center;
@@ -24,15 +26,17 @@
     margin-bottom: 40px;
     height: 250px;
     display: flex;
-    justify-content: center;
+    justify-content: space-around;
+    border-top: 3px solid $primary-color;
+    border-bottom: 3px solid $primary-color;
 }
 .info1 {
     // background-color: rgba(217, 230, 248, 0.8);
-    width: 100%;
     height: 100%;
     display: inline-block;
     padding: 10px;
     h2 {
+        text-align: center;
         margin-top: 0;
         font-size: 3rem;
     }

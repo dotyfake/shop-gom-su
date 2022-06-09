@@ -2,6 +2,12 @@ import classNames from 'classnames/bind';
 import styles from './Feedback.module.scss';
 import images from '~/assets/images';
 
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Navigation, Autoplay } from 'swiper';
+
+import 'swiper/css';
+import 'swiper/css/navigation';
+
 const listFeedback = [
     {
         name: 'Huyền Thị Đề',
@@ -32,25 +38,42 @@ const cx = classNames.bind(styles);
 
 const Feedback = () => {
     return (
-        <div className={cx('wrapper')}>
-            {listFeedback.map((feedback, i) => (
-                <div
-                    key={i}
-                    className={cx('feed-item')}
-                    style={{
-                        background: `linear-gradient(rgba(231, 242, 251,.3), rgba(231, 242, 251,.3)), url(${feedback.bg}) no-repeat center/ cover`,
-                    }}
-                >
-                    <div
-                        className={cx('img')}
-                        style={{ background: `url(${feedback.avata}) no-repeat center/ cover` }}
-                    ></div>
-                    <div className={cx('desc')}>
-                        <h2>{feedback.name}</h2>
-                        <p>{feedback.feed}</p>
-                    </div>
-                </div>
-            ))}
+        <div className={cx('wide', [styles.wrapper])}>
+            <Swiper
+                slidesPerView={1}
+                spaceBetween={0}
+                navigation={true}
+                modules={[Autoplay, Navigation]}
+                loop={true}
+                autoplay={{
+                    delay: 4500,
+                    disableOnInteraction: false,
+                }}
+                style={{
+                    '--swiper-navigation-color': '#fff',
+                }}
+            >
+                {listFeedback.map((feedback, i) => (
+                    <SwiperSlide key={i}>
+                        <div
+                            key={i}
+                            className={cx('feed-item')}
+                            style={{
+                                background: `linear-gradient(rgba(231, 242, 251,.3), rgba(231, 242, 251,.3)), url(${feedback.bg}) no-repeat center/ cover`,
+                            }}
+                        >
+                            <div
+                                className={cx('img')}
+                                style={{ background: `url(${feedback.avata}) no-repeat center/ cover` }}
+                            ></div>
+                            <div className={cx('desc')}>
+                                <h2>{feedback.name}</h2>
+                                <p>{feedback.feed}</p>
+                            </div>
+                        </div>
+                    </SwiperSlide>
+                ))}
+            </Swiper>
         </div>
     );
 };

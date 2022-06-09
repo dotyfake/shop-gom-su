@@ -145,6 +145,7 @@
     display: flex;
     height: 100px;
     width: 100%;
+    border-radius: 4px;
 
     .search-info {
         width: 100%;
@@ -160,8 +161,92 @@
             font-size: 2rem;
         }
     }
+    .search-img {
+        cursor: pointer;
+    }
 
     &:hover {
         background-color: $bg-header-color;
+    }
+    &:hover .delete {
+        color: $red;
+        visibility: visible;
+        width: 70px;
+        background-color: #e6cace;
+    }
+}
+
+.counter {
+    display: flex;
+    align-items: center;
+    height: 24px;
+}
+
+.up,
+.down {
+    width: 24px;
+    height: 100%;
+    color: $white-color;
+    background-color: #b4d1e8;
+    cursor: pointer;
+    font-size: 2rem;
+    border: none;
+    border-radius: 25%;
+    span {
+        display: inline-block;
+    }
+
+    &:active {
+        filter: brightness(110%);
+    }
+}
+
+.down {
+    margin-left: 10px;
+}
+
+.value {
+    width: 30px;
+    height: 100%;
+    font-size: 2rem;
+    text-align: center;
+}
+
+.delete {
+    overflow: hidden;
+    visibility: hidden;
+    width: 0;
+    padding: 0 10px;
+    color: $primary-color;
+    font-weight: 600;
+    border: none;
+    outline: none;
+    background-color: transparent;
+    cursor: pointer;
+    transition: all 0.2s ease-out;
+    &:first-child {
+        margin-bottom: 10px;
+    }
+    .trash {
+        font-size: 20px;
+    }
+}
+
+.delete-product {
+    visibility: visible;
+    color: $primary-color;
+    font-weight: 600;
+    border: none;
+    outline: none;
+    background-color: transparent;
+    padding-right: 8px;
+    cursor: pointer;
+    .trash {
+        font-size: 20px;
+    }
+
+    &:hover {
+        color: $red;
+        background-color: #e6cace;
     }
 }

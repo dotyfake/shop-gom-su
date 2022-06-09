@@ -9,14 +9,16 @@ const Provider = ({ children }) => {
     const [watched, setWatched] = useState(() => {
         return JSON.parse(localStorage.watched ?? '[]');
     });
-    const [cart, setCart] = useState([]);
+    const [cart, setCart] = useState(() => {
+        return JSON.parse(localStorage.cart ?? '[]');
+    });
     const [searchProducts, setSearchProducts] = useState([]);
     const [productsState, setProductsState] = useState([]);
+    const [counterCart, setCounterCart] = useState(0);
 
     useEffect(() => {
         axios('/.netlify/functions/ProductsAPI').then((res) => {
             const db = res.data.results;
-            console.log(db);
             const data = db.map((item) => {
                 const fixDesc = item.properties.Title.rich_text.map((item) => item.plain_text);
                 return {
@@ -51,6 +53,8 @@ const Provider = ({ children }) => {
                 setWatched,
                 cart,
                 setCart,
+                counterCart,
+                setCounterCart,
             }}
         >
             {children}

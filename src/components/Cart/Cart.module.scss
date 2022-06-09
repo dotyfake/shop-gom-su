@@ -1,0 +1,34 @@
+@import 'src/components/GlobalStyles/GlobalVariables';
+
+.search-info {
+    &:hover .delete {
+        transform: translateX(0);
+    }
+}
+
+.cart-footer {
+    color: $primary-color;
+    .item {
+        float: right;
+        margin: 10px 0;
+    }
+    button {
+        padding: 5px;
+        border: none;
+        color: $white-color;
+        background-color: $primary-color;
+        cursor: pointer;
+    }
+
+    span {
+        display: inline-block;
+        width: 180px;
+    }
+
+    p {
+        margin: 0;
+        display: inline-block;
+        text-align: right;
+        float: right;
+    }
+}

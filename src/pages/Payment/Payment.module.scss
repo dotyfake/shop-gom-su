@@ -1,0 +1,87 @@
+@import 'src/components/GlobalStyles/GlobalVariables';
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&family=Smooch&display=swap');
+
+.wrapper {
+    // background-color: $header-color-a;
+    border-radius: 4px;
+    margin-bottom: 100px;
+    font-family: 'Poppins', sans-serif;
+
+    h1 {
+        margin-top: 0;
+    }
+    .success {
+        width: 50%;
+        height: 50px;
+        margin: 0 25%;
+        font-size: 1.6rem;
+        background-color: $primary-color;
+        color: $white-color;
+        border: none;
+        cursor: pointer;
+    }
+
+    .cart,
+    .info {
+        background-color: $header-color-a;
+        padding: 20px;
+    }
+}
+
+.title {
+    text-align: center;
+    color: $primary-color;
+}
+.info-user {
+    .item {
+        display: flex;
+        color: $text-color;
+        font-size: 2rem;
+        font-weight: 500;
+        margin-bottom: 15px;
+
+        label {
+            width: 120px;
+        }
+    }
+
+    .note {
+        textarea {
+            border: none;
+            font-size: 1.6rem;
+            color: $primary-color;
+            flex: 1;
+            height: 80px;
+            padding-left: 10px;
+        }
+    }
+}
+input,
+.coupon {
+    border: none;
+    font-size: 1.6rem;
+    color: $primary-color;
+    flex: 1;
+    padding: 5px;
+    &::-webkit-input-placeholder {
+        font-size: 1.6rem;
+        color: $primary-color;
+    }
+}
+
+.list-products {
+    // height: 50%;
+    // overflow-y: auto;
+
+    // &::-webkit-scrollbar {
+    //     width: 12px; /* width of the entire scrollbar */
+    // }
+    // &::-webkit-scrollbar-track {
+    //     background: $white-color; /* color of the tracking area */
+    // }
+    // &::-webkit-scrollbar-thumb {
+    //     background-color: $primary-color; /* color of the scroll thumb */
+    //     border-radius: 20px; /* roundness of the scroll thumb */
+    //     border: 3px solid $white-color; /* creates padding around scroll thumb */
+    // }
+}

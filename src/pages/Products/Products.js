@@ -1,6 +1,8 @@
 import classNames from 'classnames/bind';
 import { useContext, useEffect, useState, useRef } from 'react';
 import { ProviderContext } from '~/store';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 import { Product } from '~/components';
 import images from '~/assets/images';
@@ -25,6 +27,8 @@ const Products = () => {
     const [loadPage, setLoadPage] = useState(20);
     const [endProducts, setEndProducts] = useState(false);
     const productsRef = useRef();
+    const { setCart } = useContext(ProviderContext);
+    const prevClick = useRef(0);
 
     const newProductsState = productsState.slice(0, loadPage);
     const loadProducts = () => {
@@ -70,6 +74,7 @@ const Products = () => {
         }
     };
 
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     useEffect(loadProducts, [products]);
 
     useEffect(() => {
@@ -83,8 +88,35 @@ const Products = () => {
         return () => window.removeEventListener('scroll', trackScrolling);
     });
 
+    //Toast and add product to cart
+    const show = (e) => {
+        if (e.nativeEvent.timeStamp - prevClick.current < 1200) {
+            toast.error('Bạn đã thao tác quá nhanh!', {
+                position: 'bottom-right',
+                autoClose: 2000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+            });
+        } else {
+            toast.success('Đã thêm sản phẩm vào giỏ hàng!', {
+                position: 'bottom-right',
+                autoClose: 2000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+            });
+        }
+        prevClick.current = e.nativeEvent.timeStamp;
+    };
+
     return (
         <div className={cx('wrapper', { active: true })}>
+            <ToastContainer />
             <div className="wide">
                 <div className="row">
                     <div className={cx('col l-12', 'content')}>
@@ -139,7 +171,7 @@ const Products = () => {
                                     {productsState.length > 0 &&
                                         newProductsState.map((product, i) => (
                                             <div key={i} className="col l-3 m-6 c-6">
-                                                <Product type="DEFAULT_PRODUCT" props={product} />
+                                                <Product type="DEFAULT_PRODUCT" props={product} show={show} />
                                             </div>
                                         ))}
                                 </div>

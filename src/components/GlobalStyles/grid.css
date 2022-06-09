@@ -47,6 +47,11 @@
 }
 
 @media (max-width: 739px) {
+    .wide {
+        width: 100vw;
+        padding: 0 5px;
+    }
+
     .c-0 {
         display: none;
     }

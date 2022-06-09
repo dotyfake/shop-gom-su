@@ -3,7 +3,7 @@ import classNames from 'classnames/bind';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { Navigation, Grid } from 'swiper';
+import { Navigation, Grid, Autoplay } from 'swiper';
 import 'swiper/css';
 import 'swiper/css/grid';
 import 'swiper/css/navigation';
@@ -12,14 +12,13 @@ import 'swiper/css/pagination';
 import styles from './GroupProducts.module.scss';
 import { Product } from '~/components';
 
-const GroupProducts = ({ typeGroup, name, row }) => {
+const GroupProducts = ({ typeGroup, name, row, loop, autoplay }) => {
     const prevClick = useRef(0);
 
     const cx = classNames.bind(styles);
     const groupProducts = typeGroup;
 
     const show = (e) => {
-        console.log(e.nativeEvent.timeStamp, prevClick.current);
         if (e.nativeEvent.timeStamp - prevClick.current < 1200) {
             toast.error('Bạn đã thao tác quá nhanh!', {
                 position: 'bottom-right',
@@ -46,27 +45,14 @@ const GroupProducts = ({ typeGroup, name, row }) => {
 
     return (
         <div className={cx(name, 'wide')}>
-            <ToastContainer
-                position="top-right"
-                autoClose={5000}
-                hideProgressBar={false}
-                newestOnTop={false}
-                closeOnClick
-                rtl={false}
-                pauseOnFocusLoss
-                draggable
-                pauseOnHover
-            />
-            {/* Same as */}
             <ToastContainer />
             {groupProducts && (
                 <Swiper
                     slidesPerView={4}
                     spaceBetween={50}
                     navigation={true}
-                    pagination={{
-                        clickable: true,
-                    }}
+                    loop={loop}
+                    autoplay={autoplay}
                     grid={{
                         rows: row,
                         fill: 'row',
@@ -85,7 +71,7 @@ const GroupProducts = ({ typeGroup, name, row }) => {
                             spaceBetween: 50,
                         },
                     }}
-                    modules={[Navigation, Grid]}
+                    modules={[Navigation, Grid, Autoplay]}
                 >
                     {groupProducts.map((product, i) => (
                         <SwiperSlide key={i}>

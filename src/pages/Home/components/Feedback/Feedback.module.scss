@@ -2,21 +2,14 @@
 
 .wrapper {
     display: flex;
-    height: 550px;
 
     .feed-item {
+        height: 450px;
         border: 2px solid #fff;
-        flex: 1;
         display: flex;
         justify-content: center;
         align-items: center;
         flex-direction: column;
-        transition: 0.4s;
-
-        &:hover,
-        &:focus {
-            flex-grow: 4;
-        }
     }
 
     .img {

@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import classNames from 'classnames/bind';
 import styles from './Navbar.module.scss';
 import { useContext } from 'react';
@@ -7,10 +7,10 @@ import { ProviderContext } from '~/store';
 const cx = classNames.bind(styles);
 const navItems = [
     { name: 'Trang chủ', path: '/' },
-    { name: 'Sản phẩm', path: '/Products' },
-    { name: 'Gốm sứ cao cấp', path: '/Products' },
-    { name: 'Tin mới', path: '/News' },
-    { name: 'Liên hệ', path: '/Contact' },
+    { name: 'Sản phẩm', path: '/products' },
+    // { name: 'Gốm sứ cao cấp', path: '/products' },
+    { name: 'Tin mới', path: '/news' },
+    { name: 'Liên hệ', path: '/contact' },
 ];
 
 const Navbar = () => {
@@ -35,7 +35,13 @@ const Navbar = () => {
                                 goToTop();
                             }}
                         >
-                            <Link to={item.path}>{item.name}</Link>
+                            <NavLink
+                                to={item.path}
+                                className={({ isActive }) => (isActive ? cx('active-abc') : cx('normal'))}
+                                // extra={true}
+                            >
+                                {item.name}
+                            </NavLink>
                         </li>
                     ))}
                 </ul>

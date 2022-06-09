@@ -23,6 +23,7 @@ const images = {
     binh: require('~/assets/images/products/binh.jpg'),
     am: require('~/assets/images/products/am.jpg'),
     all: require('~/assets/images/products/all.jpg'),
+    emptyCart: require('~/assets/images/empty-cart.svg').default,
 };
 
 export default images;

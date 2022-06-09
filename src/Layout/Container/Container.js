@@ -1,5 +1,5 @@
 import { Routes, Route } from 'react-router-dom';
-import { Home, Products, News, Contact, ProductPage } from '~/pages';
+import { Home, Products, News, Contact, ProductPage, Payment } from '~/pages';
 
 const Container = () => {
     return (
@@ -10,6 +10,7 @@ const Container = () => {
                 <Route path="/productPage" element={<ProductPage />} />
                 <Route path="/news" element={<News />} />
                 <Route path="/contact" element={<Contact />} />
+                <Route path="/payment" element={<Payment />} />
             </Routes>
         </div>
     );
