@@ -7,3 +7,4 @@ export { default as IconComponent } from './IconComponent/IconComponent';
 export { default as Modal } from './Modal/Modal';
 export { default as Cart } from './Cart/Cart';
 export { default as Button } from './Button';
+export { default as Title } from './Title/Title';

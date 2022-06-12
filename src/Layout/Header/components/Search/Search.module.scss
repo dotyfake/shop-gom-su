@@ -4,7 +4,6 @@
     flex: 1;
 
     .search-box {
-        width: $width-search;
         height: 40px;
         padding-left: 50px;
         border: 1px solid $primary-color;
@@ -22,7 +21,6 @@
             height: 100%;
 
             input {
-                width: $width-search - 100px;
                 position: absolute;
                 left: -25px;
                 top: 50%;
@@ -63,7 +61,9 @@
         }
     }
 }
-
+.pad {
+    padding: 10px;
+}
 .clear svg {
     color: $primary-color;
 
@@ -73,14 +73,13 @@
 }
 
 .btn-search svg {
+    cursor: pointer;
     color: $primary-color;
 }
 
 .box-result {
     background-color: #fff;
-    box-shadow: rgb(0 0 0 / 12%) 0px 2px 12px;
     border-radius: 4px;
-    width: $width-search;
 
     .title,
     .more {
@@ -98,4 +97,8 @@
         padding-bottom: 20px;
         text-decoration: underline;
     }
+}
+
+.shadow {
+    box-shadow: rgb(0 0 0 / 12%) 0px 2px 12px;
 }

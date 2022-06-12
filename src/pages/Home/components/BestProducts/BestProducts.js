@@ -6,12 +6,15 @@ import { Link } from 'react-router-dom';
 import { ProductPage } from '~/pages';
 import { useContext } from 'react';
 import { ProviderContext } from '~/store';
+import { useViewport } from '~/store';
 
 const BestProducts = () => {
     const { setProduct, setWatched } = useContext(ProviderContext);
     const bestProducts = useGetProducts('Best');
     const fixProducts = bestProducts && bestProducts.slice(0, 6);
     const cx = classNames.bind(styles);
+    const viewPort = useViewport();
+    const isTablet = viewPort.width <= 925;
 
     const goToTop = () => {
         window.scroll(0, 0);
@@ -19,7 +22,7 @@ const BestProducts = () => {
 
     return (
         <div className="wide">
-            <div className={cx('container1')}>
+            <div className={cx({ container2: isTablet, container1: !isTablet })}>
                 {bestProducts &&
                     fixProducts.map((product, i) => (
                         <div key={i} className={cx(`product-${i}`, 'product')}>

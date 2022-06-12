@@ -12,6 +12,7 @@ import styles from './ProductPage.module.scss';
 import { ProviderContext } from '~/store';
 import { Product } from '~/components';
 import { useToast } from '~/store';
+import { useViewport } from '~/store';
 
 const cx = classNames.bind(styles);
 
@@ -24,7 +25,9 @@ const ProductPage = () => {
             }
             return acc;
         }, []);
-
+    const viewPort = useViewport();
+    const isTablet = viewPort.width <= 1100;
+    const isMobile = viewPort.width <= 740;
     const { product, watched, products } = useContext(ProviderContext);
     const [newWatched, setNewWatched] = useState(handleSetWatched);
     const [newProduct, setNewProduct] = useState(handleSetProduct);
@@ -40,9 +43,9 @@ const ProductPage = () => {
             <div className="wide">
                 {newProduct && (
                     <div className="row">
-                        <div className={cx('col l-8 m-12 c-12')}>
+                        <div className={cx('col l-8 m-8 c-12')}>
                             <Swiper
-                                style={{ height: '450px' }}
+                                style={{ height: isMobile ? '250px' : '450px' }}
                                 zoom={true}
                                 navigation={true}
                                 modules={[Zoom, Navigation]}
@@ -59,7 +62,10 @@ const ProductPage = () => {
                                 </SwiperSlide>
                             </Swiper>
                         </div>
-                        <div className={cx('col l-4 m-12 c-12', [styles.info])}>
+                        <div
+                            className={cx('col l-4 m-4 c-12', [styles.info])}
+                            style={{ height: isMobile ? '350px' : undefined }}
+                        >
                             <h3>{newProduct.title}</h3>
                             <p className={cx('price')}>Giá: {newProduct.newPrice.toLocaleString()}đ</p>
                             {newProduct.sale > 0 && (
@@ -106,9 +112,22 @@ const ProductPage = () => {
                             <Swiper
                                 // style={{ width: '90%' }}
                                 navigation={true}
-                                slidesPerView={4}
-                                spaceBetween={50}
                                 modules={[Navigation]}
+                                className={cx('wrapper-watched')}
+                                breakpoints={{
+                                    300: {
+                                        slidesPerView: 2,
+                                        spaceBetween: 20,
+                                    },
+                                    740: {
+                                        slidesPerView: 3,
+                                        spaceBetween: 30,
+                                    },
+                                    1100: {
+                                        slidesPerView: 4,
+                                        spaceBetween: 50,
+                                    },
+                                }}
                             >
                                 {newWatched
                                     .sort((a, b) => b - a)

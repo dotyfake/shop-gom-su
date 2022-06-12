@@ -10,7 +10,7 @@ import Search from './components/Search/Search';
 import Navbar from './components/Navbar/Navbar';
 import Sidebar from './components/Sidebar/Sidebar';
 import images from '~/assets/images/';
-import { Product, Modal } from '~/components';
+import { Product, Modal, Button } from '~/components';
 import { ProviderContext } from '~/store';
 import { useViewport } from '~/store';
 
@@ -18,8 +18,10 @@ const cx = classNames.bind(styles);
 
 const Header = () => {
     const viewPort = useViewport();
-    const isMobile = viewPort.width <= 1024;
+    const isTablet = viewPort.width <= 1100;
+    const isMobile = viewPort.width <= 400;
     const [minimizeHeader, setMinimizeHeader] = useState(false);
+    const [goTop, setGoTop] = useState(false);
     const [isEmptyCart, setIsEmptyCart] = useState(false);
     const [showModal, setShowModal] = useState(false);
 
@@ -38,7 +40,6 @@ const Header = () => {
     });
 
     const handleSumPrice = () => {
-        console.log(sumPrice);
         setSumPrice(
             cart.reduce((sum, product) => {
                 sum += product.counter * product.price;
@@ -58,6 +59,13 @@ const Header = () => {
     useEffect(handleSumPrice, [cart, sumPrice]);
 
     useEffect(() => {
+        window.addEventListener('scroll', () => setGoTop(window.scrollY > 300));
+        return () => {
+            window.removeEventListener('scroll', () => setGoTop(window.scrollY > 300));
+        };
+    });
+
+    useEffect(() => {
         setCounterCart(cart.length);
         setIsEmptyCart(cart.length === 0);
     }, [cart, setCounterCart]);
@@ -70,16 +78,16 @@ const Header = () => {
     }, []);
 
     return (
-        <div className={cx({ wrapper: !minimizeHeader }, { minimize: minimizeHeader })}>
+        <div className={cx({ wrapper: !minimizeHeader }, { minimize: isMobile || minimizeHeader })}>
             <div className="wide">
                 <div className={cx('header')}>
-                    {isMobile && <Sidebar />}
+                    {isTablet && <Sidebar />}
                     <div className={cx('logo')}>
                         <Link to="/" element={<Home />}>
-                            <img className={cx('logo-img', { transformX: isMobile })} src={images.logo} alt="Logo" />
+                            <img className={cx('logo-img', { transformX: isTablet })} src={images.logo} alt="Logo" />
                         </Link>
                     </div>
-                    {!isMobile && (
+                    {!isTablet && (
                         <div className={cx('center')}>
                             <Navbar />
                             <Search mini={minimizeHeader} />
@@ -94,7 +102,6 @@ const Header = () => {
                             className={cx('cart')}
                             onClick={() => {
                                 setShowModal(true);
-                                console.log(cart);
                             }}
                         >
                             <button className={cx('cart-icon')}>
@@ -103,7 +110,12 @@ const Header = () => {
                             </button>
                         </div>
                         {showModal && (
-                            <Modal width="400" right setShowModal={setShowModal} ref={closeModal}>
+                            <Modal
+                                width={isMobile ? '100vw' : '400px'}
+                                right
+                                setShowModal={setShowModal}
+                                ref={closeModal}
+                            >
                                 <div className={cx('cart-result')}>
                                     <div className={cx('title')}>Gỏi hàng</div>
                                     {isEmptyCart && (
@@ -182,6 +194,11 @@ const Header = () => {
                         )}
                     </div>
                 </div>
+                {goTop && (
+                    <button className={cx('goToTop')} onClick={() => window.scroll(0, 0)}>
+                        <FontAwesomeIcon icon={solid('angles-up')} />
+                    </button>
+                )}
             </div>
         </div>
     );

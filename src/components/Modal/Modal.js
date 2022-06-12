@@ -17,11 +17,14 @@ const Modal = ({ children, width, left, right, setShowModal }, ref) => {
     return (
         <>
             <div
-                className={cx('modal', { hide: show })}
+                className={cx('modal', {
+                    hideRight: show && right,
+                    hideLeft: show && left,
+                    left,
+                    right,
+                })}
                 style={{
-                    width: `${width}px`,
-                    left: left && '0',
-                    right: right && '0',
+                    width: `${width}`,
                 }}
             >
                 {children}

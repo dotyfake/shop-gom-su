@@ -1,12 +1,13 @@
+@import 'src/components/GlobalStyles/GlobalVariables';
+
 .wrapper {
     display: inline-flex;
     align-items: center;
     justify-content: center;
     min-width: 100px;
-    padding: 9px 16px;
-    border-radius: 4px;
+    padding: 5px;
     font-size: 1.6rem;
-    font-weight: 700;
+    font-weight: 600;
     cursor: pointer;
     background-color: #fff;
     border: 1px solid transparent;
@@ -19,5 +20,25 @@
     &.disabled {
         pointer-events: none;
         opacity: 0.5;
+    }
+}
+
+.primary {
+    background-color: $primary-color;
+    color: $white-color;
+    font-size: 1.6rem;
+    svg {
+        margin-right: 5px;
+        font-size: 1.8rem;
+    }
+}
+
+.red {
+    background-color: $red;
+    color: $white-color;
+    font-size: 1.6rem;
+    svg {
+        margin-right: 5px;
+        font-size: 2rem;
     }
 }

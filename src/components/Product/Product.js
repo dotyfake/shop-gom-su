@@ -7,13 +7,17 @@ import { useContext, useRef, useState } from 'react';
 import { ProviderContext } from '~/store';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { solid } from '@fortawesome/fontawesome-svg-core/import.macro';
+import { useViewport } from '~/store';
 
 const cx = classNames.bind(styles);
 
-const Product = ({ type, props, show, hide, event, counter, index, setSumPrice, isPayment }) => {
+const Product = ({ type, props, show, hide, event, counter, index, setSumPrice, isPayment, closeSidebar }) => {
     const { setProduct, setWatched, setCart, cart } = useContext(ProviderContext);
     const [currentCounter, setCurrentCounter] = useState(counter);
     const prevClick = useRef(0);
+    const viewPort = useViewport();
+    const isTablet = viewPort.width <= 740;
+    const isMobile = viewPort.width <= 510;
 
     let navigate = useNavigate();
     const [currentSumPrice, setCurrentSumPrice] = useState(() => props.newPrice * counter);
@@ -36,7 +40,9 @@ const Product = ({ type, props, show, hide, event, counter, index, setSumPrice, 
                     {<div></div>}
                     <div
                         className={cx('wrapper')}
-                        style={{ background: `url(${images.productBg}) no-repeat center/ contain` }}
+                        style={{
+                            background: `url(${images.productBg}) no-repeat center/ contain`,
+                        }}
                     >
                         <div className={cx('info')}>
                             <div className={cx('tags')}>
@@ -61,8 +67,11 @@ const Product = ({ type, props, show, hide, event, counter, index, setSumPrice, 
                                     style={{
                                         background: `url(${props.imageThumb}) no-repeat center/ contain`,
                                         paddingTop: '90%',
+                                        // top: isMobile && '0',
                                     }}
-                                ></div>
+                                >
+                                    {/* <img src={props.imageThumb} alt="" width="100%" /> */}
+                                </div>
                             </Link>
                             <div className={cx('desc')}>
                                 <Link
@@ -109,7 +118,7 @@ const Product = ({ type, props, show, hide, event, counter, index, setSumPrice, 
                                     </div>
                                 </div>
                             </div>
-                            {props.status.includes('Luxury Product') && <span>Sản phẩm cao cấp</span>}
+                            {props.status.includes('Luxury Product') && !isTablet && <span>Sản phẩm cao cấp</span>}
                         </div>
                     </div>
                 </>
@@ -120,6 +129,7 @@ const Product = ({ type, props, show, hide, event, counter, index, setSumPrice, 
                     to="/productPage"
                     element={<ProductPage />}
                     onClick={() => {
+                        closeSidebar();
                         hide();
                         setProduct(() => {
                             localStorage.setItem('product', JSON.stringify(props.id));
@@ -150,7 +160,7 @@ const Product = ({ type, props, show, hide, event, counter, index, setSumPrice, 
                     className={cx('wrapper')}
                     style={{ background: `url(${images.productBg2}) no-repeat center/ contain` }}
                 >
-                    <div className={cx('info')}>
+                    <div className={cx('info')} style={{ height: isMobile ? '200px' : '250px' }}>
                         {/* <div className={cx('tags')}>
                             {props.sale > 0 && <p className={cx('sale')}>{`-` + props.sale + `%`}</p>}
                             {props.status.includes('New') && <p className={cx('new')}>New</p>}
@@ -276,7 +286,13 @@ const Product = ({ type, props, show, hide, event, counter, index, setSumPrice, 
                         </span>
                     </div>
                     {!isPayment && (
-                        <button className={cx('delete')} onClick={event}>
+                        <button
+                            className={cx('delete')}
+                            onClick={() => {
+                                setCart();
+                                event();
+                            }}
+                        >
                             <FontAwesomeIcon className={cx('trash')} icon={solid('trash')} />
                         </button>
                     )}

@@ -8,12 +8,15 @@ import 'swiper/css';
 import 'swiper/css/grid';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
+import { useViewport } from '~/store';
 
 import styles from './GroupProducts.module.scss';
 import { Product } from '~/components';
 
 const GroupProducts = ({ typeGroup, name, row, loop, autoplay }) => {
     const prevClick = useRef(0);
+    const viewPort = useViewport();
+    const isMobile = viewPort.width <= 740;
 
     const cx = classNames.bind(styles);
     const groupProducts = typeGroup;
@@ -48,25 +51,27 @@ const GroupProducts = ({ typeGroup, name, row, loop, autoplay }) => {
             <ToastContainer />
             {groupProducts && (
                 <Swiper
+                    className={cx('wrapper-group')}
                     slidesPerView={4}
                     spaceBetween={50}
                     navigation={true}
                     loop={loop}
                     autoplay={autoplay}
+                    style={{ width: isMobile && '270px' }}
                     grid={{
                         rows: row,
                         fill: 'row',
                     }}
                     breakpoints={{
-                        640: {
-                            slidesPerView: 2,
-                            spaceBetween: 50,
+                        100: {
+                            slidesPerView: 1,
+                            spaceBetween: 30,
                         },
-                        768: {
+                        740: {
                             slidesPerView: 3,
                             spaceBetween: 50,
                         },
-                        1024: {
+                        1100: {
                             slidesPerView: 4,
                             spaceBetween: 50,
                         },

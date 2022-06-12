@@ -1,0 +1,15 @@
+@import 'src/components/GlobalStyles/GlobalVariables';
+
+.wrapper {
+    svg {
+        margin-right: 5px;
+    }
+}
+
+.primary {
+    color: $primary-color;
+}
+
+.large {
+    font-size: 2rem;
+}

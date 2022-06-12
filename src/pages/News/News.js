@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
 import classNames from 'classnames/bind';
+import { useViewport } from '~/store';
 
 import { TitleGroup } from '~/components';
 import styles from './News.module.scss';
@@ -13,6 +14,8 @@ const News = () => {
     const [temporary, setTemporary] = useState(true);
     const [endNews, setEndNews] = useState(false);
     const newsRef = useRef();
+    const viewPort = useViewport();
+    const isMobile = viewPort.width <= 740;
 
     setTimeout(() => {
         setTemporary(false);
@@ -67,7 +70,7 @@ const News = () => {
                         )}
                         {newsList.length > 0 &&
                             loadNewsList.map((item, i) => (
-                                <div key={i} className={cx('news-item')}>
+                                <div key={i} className={cx('news-item')} style={{ padding: isMobile && '25px 20px' }}>
                                     <h3>{item.date}</h3>
                                     <h1>{item.title}</h1>
                                     <p>{item.desc1}</p>

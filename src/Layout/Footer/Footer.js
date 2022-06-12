@@ -2,10 +2,15 @@ import classNames from 'classnames/bind';
 
 import styles from './Footer.module.scss';
 import images from '~/assets/images';
+import { useViewport } from '~/store';
 
 const cx = classNames.bind(styles);
 
 const Footer = () => {
+    const viewPort = useViewport();
+    const isTablet = viewPort.width <= 1112;
+    const isMobile = viewPort.width <= 740;
+
     return (
         <div
             className={cx('wrapper')}
@@ -40,36 +45,42 @@ const Footer = () => {
                         ></iframe>
                     </div>
                 </div>
-                <div className="col l-3 m-12 c-12">
-                    <p style={{ margin: '0' }}>Địa chỉ: Vùng tối của mặt trăng, Mặt trăng</p>
-                    <p>Số điện thoại: 9966</p>
-                    <p>Số fax: 6699</p>
-                    <p>Email: mailmeow@meow.meow</p>
-                    <p>
-                        Website:
-                        <a href="gomsu.tk"> Gốm nhà Khuê My</a>
-                    </p>
-                </div>
-                <div className="col l-3 m-12 c-12">
-                    <ul style={{ margin: '0' }}>
-                        <li>
-                            <strong>Gốm sứ chất lượng cao</strong>
-                            <p>Quy trình sản xuất đạt tiêu chuẩn</p>
-                        </li>
-                        <li>
-                            <strong>Mua hàng(T2-CN)</strong>
-                            <p>Mở cửa tất cả các ngày trong tuần!</p>
-                        </li>
-                        <li>
-                            <strong>Miễn phí giao hàng</strong>
-                        </li>
-                    </ul>
-                </div>
-                <div className="col l-3 m-12 c-12">
-                    <div className={cx('f4')}>
-                        <img src={images.logo} alt="logo" className={cx('logo')} />
+                <div className="col l-3 m-12 c-12" style={{ margin: isMobile && '20px 0' }}>
+                    <div className={cx('info-shop')}>
+                        <p style={{ margin: '0' }}>Địa chỉ: Vùng tối của mặt trăng, Mặt trăng</p>
+                        <p>Số điện thoại: 9966</p>
+                        <p>Số fax: 6699</p>
+                        <p>Email: mailmeow@meow.meow</p>
+                        <p>
+                            Website:
+                            <a href="gomsu.tk"> Gốm nhà Khuê My</a>
+                        </p>
                     </div>
                 </div>
+                {!isTablet && (
+                    <div className="col l-3 m-12 c-12">
+                        <ul style={{ margin: '0' }}>
+                            <li>
+                                <strong>Gốm sứ chất lượng cao</strong>
+                                <p>Quy trình sản xuất đạt tiêu chuẩn</p>
+                            </li>
+                            <li>
+                                <strong>Mua hàng(T2-CN)</strong>
+                                <p>Mở cửa tất cả các ngày trong tuần!</p>
+                            </li>
+                            <li>
+                                <strong>Miễn phí giao hàng</strong>
+                            </li>
+                        </ul>
+                    </div>
+                )}
+                {!isTablet && (
+                    <div className="col l-3 m-12 c-12">
+                        <div className={cx('f4')}>
+                            <img src={images.logo} alt="logo" className={cx('logo')} />
+                        </div>
+                    </div>
+                )}
             </div>
             <p className={cx('copyright')}>{`Copyright 2022 © Doty - Design & code by Doty`}</p>
         </div>

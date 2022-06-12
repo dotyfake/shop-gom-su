@@ -3,6 +3,10 @@ import { useContext, useEffect, useState, useRef } from 'react';
 import { ProviderContext } from '~/store';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Navigation } from 'swiper';
+import 'swiper/css';
+import 'swiper/css/navigation';
 
 import { Product } from '~/components';
 import images from '~/assets/images';
@@ -115,69 +119,86 @@ const Products = () => {
     };
 
     return (
-        <div className={cx('wrapper', { active: true })}>
-            <ToastContainer />
-            <div className="wide">
+        <div className="wide">
+            <div className={cx('wrapper', { active: true })}>
+                <ToastContainer />
+
                 <div className="row">
-                    <div className={cx('col l-12', 'content')}>
-                        <div className="row">
-                            <div className={cx('col l-12', [styles.tags])}>
-                                <aside className={cx('side-bar')}>
-                                    {/* <h3>Loại sản phẩm</h3> */}
-                                    {optionsProducts.map((product, i) => (
+                    <div className={cx('col l-12 c-12 m-12', [styles.tags])}>
+                        <aside className={cx('side-bar')}>
+                            <Swiper
+                                navigation={true}
+                                initialSlide={2}
+                                breakpoints={{
+                                    300: {
+                                        slidesPerView: 3,
+                                        spaceBetween: 30,
+                                    },
+                                    740: {
+                                        slidesPerView: 5,
+                                        spaceBetween: 30,
+                                    },
+                                    1100: {
+                                        slidesPerView: 7,
+                                        spaceBetween: 50,
+                                    },
+                                }}
+                                modules={[Navigation]}
+                                className={cx('wrapper-options')}
+                            >
+                                {optionsProducts.map((product, i) => (
+                                    <SwiperSlide
+                                        key={i}
+                                        className={cx('options-item', {
+                                            active: optionsType === product.name,
+                                        })}
+                                        onClick={() => optionType(product.name)}
+                                    >
                                         <div
-                                            key={i}
-                                            className={cx('options-item', {
-                                                active: optionsType === product.name,
-                                            })}
-                                            onClick={() => optionType(product.name)}
-                                        >
-                                            <div
-                                                style={{
-                                                    background: `url(${product.image}) center / contain no-repeat`,
-                                                    paddingTop: '70%',
-                                                }}
-                                            ></div>
-                                            <h4>{product.name}</h4>
-                                        </div>
-                                    ))}
-                                </aside>
-                                <div className={cx('select-filter')}>
-                                    <h4>Sản phẩm {!!select && ` - ` + select}</h4>
-                                    <div className={cx('filter')}>
-                                        Lọc sản phẩm theo
-                                        <select
-                                            className={cx('select-box')}
-                                            value={select}
-                                            onChange={(e) => {
-                                                setOptionsType('');
-                                                setSelected(e.target.value);
-                                                loadSelect(e.target.value);
+                                            style={{
+                                                background: `url(${product.image}) center / contain no-repeat`,
+                                                paddingTop: '70%',
                                             }}
-                                        >
-                                            <option value="Tất cả sản phẩm">Tất cả sản phẩm</option>
-                                            <option value="Giá: Thấp đến Cao">Giá: Thấp đến Cao </option>
-                                            <option value="Giá: Cao đến thấp">Giá: Cao đến thấp</option>
-                                            <option value="Bán chạy">Bán chạy</option>
-                                            <option value="Mới nhất">Mới nhất</option>
-                                            <option value="Đang khuyến mãi">Đang khuyến mãi</option>
-                                            <option value="Gốm sứ cao cấp">Gốm sứ cao cấp</option>
-                                        </select>
-                                    </div>
-                                </div>
-                            </div>
-                            <div className={cx('col l-12', [styles.products])} ref={productsRef}>
-                                <div className="row">
-                                    {productsState.length > 0 &&
-                                        newProductsState.map((product, i) => (
-                                            <div key={i} className="col l-3 m-6 c-6">
-                                                <Product type="DEFAULT_PRODUCT" props={product} show={show} />
-                                            </div>
-                                        ))}
-                                </div>
-                                {endProducts && <h4 className={cx('end')}>Không còn sản phẩm nào</h4>}
+                                        ></div>
+                                        <h4>{product.name}</h4>
+                                    </SwiperSlide>
+                                ))}
+                            </Swiper>
+                        </aside>
+                        <div className={cx('select-filter')}>
+                            {/* <h4>Sản phẩm {!!select && ` - ` + select}</h4> */}
+                            <div className={cx('filter')}>
+                                Lọc sản phẩm theo
+                                <select
+                                    className={cx('select-box')}
+                                    value={select}
+                                    onChange={(e) => {
+                                        setOptionsType('');
+                                        setSelected(e.target.value);
+                                        loadSelect(e.target.value);
+                                    }}
+                                >
+                                    <option value="Tất cả sản phẩm">Tất cả sản phẩm</option>
+                                    <option value="Giá: Thấp đến Cao">Giá: Thấp đến Cao </option>
+                                    <option value="Giá: Cao đến thấp">Giá: Cao đến thấp</option>
+                                    <option value="Bán chạy">Bán chạy</option>
+                                    <option value="Mới nhất">Mới nhất</option>
+                                    <option value="Đang khuyến mãi">Đang khuyến mãi</option>
+                                    <option value="Gốm sứ cao cấp">Gốm sứ cao cấp</option>
+                                </select>
                             </div>
                         </div>
+                    </div>
+                    <div className={cx('col l-12 c-12 m-12', [styles.products])} ref={productsRef}>
+                        <div className="row">
+                            {productsState.length > 0 &&
+                                newProductsState.map((product, i) => (
+                                    <div key={i} className="col l-3 m-4 c-6">
+                                        <Product type="DEFAULT_PRODUCT" props={product} show={show} />
+                                    </div>
+                                ))}
+                        </div>
+                        {endProducts && <h4 className={cx('end')}>Không còn sản phẩm nào</h4>}
                     </div>
                 </div>
             </div>

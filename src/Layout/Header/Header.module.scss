@@ -158,3 +158,19 @@
         }
     }
 }
+
+.goToTop {
+    background-color: $header-color-a;
+    padding: 5px;
+    cursor: pointer;
+    border: none;
+    border-radius: 4px;
+    position: fixed;
+    bottom: 30px;
+    right: 10%;
+    z-index: 100;
+    svg {
+        font-size: 3rem;
+        color: $primary-color;
+    }
+}

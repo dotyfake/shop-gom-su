@@ -5,8 +5,8 @@
     background-color: #fff;
     box-shadow: rgb(0 0 0 / 12%) 0px 2px 12px;
     transition: all 0.2s ease;
+    overflow: hidden;
     z-index: 999;
-    animation: transform 0.2s ease-in-out;
 }
 
 .modal-overlay {
@@ -17,10 +17,25 @@
     right: 0;
     background-color: rgba(0, 0, 0, 0.3);
     animation: fade 0.2s linear;
+    z-index: 998;
 }
 
-.hide {
-    animation: transformOut 0.2s ease-in-out;
+.right {
+    right: 0;
+    animation: transformRight 0.2s ease-in-out;
+}
+
+.left {
+    left: 0;
+    animation: transformLeft 0.2s ease-in-out;
+}
+
+.hideRight {
+    animation: transformRightOut 0.2s ease-in-out;
+}
+
+.hideLeft {
+    animation: transformLeftOut 0.2s ease-in-out;
 }
 
 @keyframes fade {
@@ -32,7 +47,7 @@
     }
 }
 
-@keyframes transform {
+@keyframes transformRight {
     0% {
         transform: translateX(100%);
         opacity: 0;
@@ -43,7 +58,7 @@
     }
 }
 
-@keyframes transformOut {
+@keyframes transformRightOut {
     0% {
         transform: translateX(0);
         opacity: 1;
@@ -51,5 +66,27 @@
     100% {
         transform: translateX(100%);
         opacity: 0;
+    }
+}
+
+@keyframes transformLeft {
+    0% {
+        transform: translateX(-100%);
+        opacity: 1;
+    }
+    100% {
+        transform: translateX(0);
+        opacity: 0;
+    }
+}
+
+@keyframes transformLeftOut {
+    0% {
+        transform: translateX(0);
+        opacity: 0;
+    }
+    100% {
+        transform: translateX(-100%);
+        opacity: 1;
     }
 }

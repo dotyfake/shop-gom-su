@@ -1,12 +1,13 @@
 import classNames from 'classnames/bind';
 import { Link } from 'react-router-dom';
-import styles from './Button.module.scss';
+import styles from './Title.module.scss';
 
 const cx = classNames.bind(styles);
 
-function Button({
+function Title({
     to,
     href,
+    tag = 'div',
     primary = false,
     outline = false,
     text = false,
@@ -19,10 +20,9 @@ function Button({
     leftIcon,
     rightIcon,
     onClick,
-    red,
     ...passProps
 }) {
-    let Comp = 'button';
+    let Comp = tag;
     const props = {
         onClick,
         ...passProps,
@@ -54,7 +54,6 @@ function Button({
         rounded,
         small,
         large,
-        red,
     });
 
     return (
@@ -66,4 +65,4 @@ function Button({
     );
 }
 
-export default Button;
+export default Title;

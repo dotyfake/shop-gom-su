@@ -1,0 +1,40 @@
+@import 'src/components/GlobalStyles/GlobalVariables';
+
+.wrapper {
+    position: relative;
+
+    .logo {
+        text-align: center;
+        margin-top: 10px;
+    }
+
+    .logo-img {
+        width: 50%;
+    }
+    & > svg {
+        font-size: 4rem;
+        color: $primary-color;
+        cursor: pointer;
+    }
+
+    ul {
+        padding: 0;
+    }
+
+    li {
+        padding: 10px 0 10px 20px;
+        transition: all 0.2s;
+        cursor: pointer;
+        &:hover {
+            background-color: $header-color-a;
+            transform: translateX(5px);
+        }
+    }
+}
+
+.close {
+    position: absolute;
+    bottom: 10px;
+    width: 33.333%;
+    margin: 0 33.333%;
+}

@@ -13,8 +13,13 @@ import removeVietnameseTones from './removeVietnameseTones';
 import { Product } from '~/components';
 import { ProviderContext } from '~/store';
 import { Products } from '~/pages';
+import { useViewport } from '~/store';
 
-const Search = ({ mini }) => {
+const Search = ({ mini, width = `450px`, closeSidebar }) => {
+    const viewPort = useViewport();
+    const isTablet = viewPort.width <= 1100;
+    const isMobile = viewPort.width <= 740;
+
     const [typeWriter, setTypeWriter] = useState(true);
     const [clearSearch, setClearSearch] = useState(false);
     const [visible, setVisible] = useState(false);
@@ -39,10 +44,15 @@ const Search = ({ mini }) => {
             onClickOutside={hide}
             placement="bottom"
             render={(attrs) => (
-                <div className={cx('box-result')} tabIndex="-1" {...attrs}>
+                <div
+                    className={cx('box-result', { shadow: !isTablet })}
+                    tabIndex="-1"
+                    {...attrs}
+                    style={{ width: `${width}` }}
+                >
                     {/* <div className={cx('title')}>Kết quả tìm kiếm</div> */}
                     {searchResults.map((item, i) => (
-                        <Product key={i} type="SEARCH_PRODUCT" props={item} hide={hide} />
+                        <Product key={i} type="SEARCH_PRODUCT" props={item} hide={hide} closeSidebar={closeSidebar} />
                     ))}
                     {searchProducts.length > 4 && (
                         <Link
@@ -53,16 +63,19 @@ const Search = ({ mini }) => {
                                 setProductsState(searchProducts);
                             }}
                         >
-                            <div className={cx('more')}>Xem thêm</div>
+                            <div className={cx('more')} onClick={() => closeSidebar()}>
+                                Xem thêm
+                            </div>
                         </Link>
                     )}
                 </div>
             )}
         >
-            <div className={cx('wrapper', { hide: mini })}>
+            <div className={cx('wrapper', { hide: mini, pad: isMobile || isTablet })} style={{ width: `${width}` }}>
                 <div className={cx('search-box')}>
                     <div className={cx('child')}>
                         <input
+                            style={{ width: `${width * 0.8}` }}
                             type="text"
                             ref={searchRef}
                             value={inputSearch}
@@ -81,7 +94,6 @@ const Search = ({ mini }) => {
                             }}
                             onChange={(e) => {
                                 setInputSearch(e.target.value);
-                                console.log(e.nativeEvent.inputType);
                                 if (e.target.value.length > 0) {
                                     setClearSearch(true);
                                 } else {

@@ -6,15 +6,18 @@ import Slide from './components/Slide/Slide';
 import { GroupProducts, TitleGroup, ContactElement } from '~/components';
 import BestProducts from './components/BestProducts/BestProducts';
 import Feedback from './components/Feedback/Feedback';
+import { useViewport } from '~/store';
 
 const cx = classNames.bind(styles);
 
 const Home = () => {
+    const viewPort = useViewport();
+    const isMobile = viewPort.width <= 510;
     return (
         <div className={cx('content')}>
             <Slide />
             <TitleGroup title="Sản phẩm mới" noMargin />
-            <GroupProducts typeGroup={useGetProducts('New')} name="NewProducts" row={2} />
+            <GroupProducts typeGroup={useGetProducts('New')} name="NewProducts" row={isMobile ? 1 : 2} />
             <TitleGroup title="Sản phẩm bán chạy" />
             <GroupProducts
                 typeGroup={useGetProducts('Hot')}
@@ -28,7 +31,7 @@ const Home = () => {
             <TitleGroup title="Phản hồi từ khách hàng" />
             <Feedback />
             <TitleGroup title="Về chúng tôi" />
-            {/* <ContactElement /> */}
+            <ContactElement />
         </div>
     );
 };
