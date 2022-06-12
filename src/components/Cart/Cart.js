@@ -63,6 +63,7 @@ const Cart = () => {
             <div className={cx('list-product')}>
                 {getCartByIds.map((item, i) => (
                     <Product
+                        height="140px"
                         isPayment
                         index={i}
                         key={i}

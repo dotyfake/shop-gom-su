@@ -11,7 +11,7 @@ import { useViewport } from '~/store';
 
 const cx = classNames.bind(styles);
 
-const Product = ({ type, props, show, hide, event, counter, index, setSumPrice, isPayment, closeSidebar }) => {
+const Product = ({ type, props, show, hide, event, counter, index, setSumPrice, isPayment, closeSidebar, height }) => {
     const { setProduct, setWatched, setCart, cart } = useContext(ProviderContext);
     const [currentCounter, setCurrentCounter] = useState(counter);
     const prevClick = useRef(0);
@@ -208,7 +208,7 @@ const Product = ({ type, props, show, hide, event, counter, index, setSumPrice, 
             );
         case 'CART-PRODUCT':
             return (
-                <div className={cx('product-search')}>
+                <div className={cx('product-search')} style={{ height: height }}>
                     <div
                         className={cx('search-img')}
                         style={{
