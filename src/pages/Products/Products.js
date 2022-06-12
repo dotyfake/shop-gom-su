@@ -122,6 +122,11 @@ const Products = () => {
         <div className="wide">
             <div className={cx('wrapper', { active: true })}>
                 <ToastContainer />
+                {productsState.length === 0 && (
+                    <p style={{ textAlign: 'center', fontWeight: '600', fontSize: '1.8rem', color: '#444' }}>
+                        Không tìm thấy sản phẩm nào!
+                    </p>
+                )}
 
                 <div className="row">
                     <div className={cx('col l-12 c-12 m-12', [styles.tags])}>
@@ -194,7 +199,7 @@ const Products = () => {
                             {productsState.length > 0 &&
                                 newProductsState.map((product, i) => (
                                     <div key={i} className="col l-3 m-4 c-6">
-                                        <Product type="DEFAULT_PRODUCT" props={product} show={show} />
+                                        <Product type="DEFAULT_PRODUCT" props={product} show={show} fixImgMobile />
                                     </div>
                                 ))}
                         </div>

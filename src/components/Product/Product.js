@@ -11,13 +11,28 @@ import { useViewport } from '~/store';
 
 const cx = classNames.bind(styles);
 
-const Product = ({ type, props, show, hide, event, counter, index, setSumPrice, isPayment, closeSidebar, height }) => {
+const Product = ({
+    type,
+    props,
+    show,
+    hide,
+    event,
+    counter,
+    index,
+    setSumPrice,
+    isPayment,
+    closeSidebar,
+    height,
+    fixImgMobile,
+    noPrice,
+}) => {
     const { setProduct, setWatched, setCart, cart } = useContext(ProviderContext);
     const [currentCounter, setCurrentCounter] = useState(counter);
     const prevClick = useRef(0);
     const viewPort = useViewport();
     const isTablet = viewPort.width <= 740;
     const isMobile = viewPort.width <= 510;
+    const isMiniMobile = viewPort.width <= 450;
 
     let navigate = useNavigate();
     const [currentSumPrice, setCurrentSumPrice] = useState(() => props.newPrice * counter);
@@ -67,7 +82,7 @@ const Product = ({ type, props, show, hide, event, counter, index, setSumPrice, 
                                     style={{
                                         background: `url(${props.imageThumb}) no-repeat center/ contain`,
                                         paddingTop: '90%',
-                                        // top: isMobile && '0',
+                                        top: isMiniMobile && fixImgMobile && '15%',
                                     }}
                                 >
                                     {/* <img src={props.imageThumb} alt="" width="100%" /> */}
@@ -234,7 +249,7 @@ const Product = ({ type, props, show, hide, event, counter, index, setSumPrice, 
                         >
                             <div className={cx('search-name')}>{props.title}</div>
                         </Link>
-                        <div className={cx('search-price')}>{props.newPrice.toLocaleString()} vnđ</div>
+                        {!noPrice && <div className={cx('search-price')}>{props.newPrice.toLocaleString()} vnđ</div>}
                         <div className={cx('counter')}>
                             Số lượng:
                             <button
@@ -282,7 +297,7 @@ const Product = ({ type, props, show, hide, event, counter, index, setSumPrice, 
                             </button>
                         </div>
                         <span style={{ fontWeight: '500', color: '#444' }}>
-                            Thành tiền: {currentSumPrice.toLocaleString()} vnđ
+                            {!noPrice && 'Thành tiền:'} {currentSumPrice.toLocaleString()} vnđ
                         </span>
                     </div>
                     {!isPayment && (

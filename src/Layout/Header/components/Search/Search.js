@@ -87,7 +87,12 @@ const Search = ({ mini, width = `450px`, closeSidebar }) => {
                             }}
                             onKeyPress={(e) => {
                                 if (e.key === 'Enter') {
-                                    setProductsState(searchProducts);
+                                    if (searchProducts.length === 0) {
+                                        setProductsState([]);
+                                    } else {
+                                        setProductsState(searchProducts);
+                                    }
+                                    closeSidebar();
                                     hide();
                                     navigate('/products');
                                 }
@@ -156,7 +161,12 @@ const Search = ({ mini, width = `450px`, closeSidebar }) => {
                                         className={cx('btn-search')}
                                         onClick={() => {
                                             hide();
-                                            setProductsState(searchProducts);
+                                            if (searchProducts.length === 0) {
+                                                setProductsState([]);
+                                            } else {
+                                                setProductsState(searchProducts);
+                                            }
+                                            closeSidebar();
                                         }}
                                     >
                                         <FontAwesomeIcon icon={solid('magnifying-glass')} size="lg" />
