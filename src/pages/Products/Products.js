@@ -118,6 +118,10 @@ const Products = () => {
         prevClick.current = e.nativeEvent.timeStamp;
     };
 
+    useEffect(() => {
+        document.title = 'Sản phẩm - Gốm nhà Khuê My';
+    }, []);
+
     return (
         <div className="wide">
             <div className={cx('wrapper', { active: true })}>

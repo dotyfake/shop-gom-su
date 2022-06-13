@@ -19,7 +19,7 @@ const cx = classNames.bind(styles);
 const Header = () => {
     const viewPort = useViewport();
     const isTablet = viewPort.width <= 1100;
-    const isMobile = viewPort.width <= 400;
+    const isMobile = viewPort.width <= 740;
     const [minimizeHeader, setMinimizeHeader] = useState(false);
     const [goTop, setGoTop] = useState(false);
     const [isEmptyCart, setIsEmptyCart] = useState(false);
@@ -165,6 +165,7 @@ const Header = () => {
                                                     onClick={() => {
                                                         setTimeout(() => setShowModal(false), 200);
                                                         closeModal.current();
+                                                        window.scroll(0, 0);
                                                     }}
                                                 >
                                                     <FontAwesomeIcon

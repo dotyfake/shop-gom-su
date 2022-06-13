@@ -7,7 +7,12 @@ const cx = classNames.bind(styles);
 const ContactElement = () => {
     return (
         <div className={cx('wrapper')}>
-            <div className={cx('bg')} style={{ background: `url(${images.contact}) center / cover no-repeat` }}>
+            <div
+                className={cx('bg')}
+                style={{
+                    background: `linear-gradient(rgba(0,0,0,.4), rgba(0,0,0,.4)),url(${images.contact}) center / cover no-repeat`,
+                }}
+            >
                 <h2>LIÊN HỆ</h2>
                 <h4>Chăm sóc khách hàng là niềm vui của chúng tôi!</h4>
             </div>

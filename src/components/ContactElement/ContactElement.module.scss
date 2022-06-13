@@ -7,6 +7,7 @@
     flex-direction: column;
     margin-bottom: 20px;
     height: 250px;
+    padding: 20px;
 
     h2 {
         color: #fff;
@@ -16,6 +17,7 @@
     }
 
     h4 {
+        text-align: center;
         color: #fff;
         margin: 0;
         font-size: 2rem;
@@ -29,14 +31,13 @@
     // border-bottom: 3px solid $primary-color;
 }
 .info1 {
-    // background-color: rgba(217, 230, 248, 0.8);
+    font-family: 'Poppins', sans-serif;
     height: 100%;
     width: 100%;
     display: inline-block;
     padding: 20px;
-    transform: skew(-6deg);
+    transform: skew(-3deg);
     border: 5px double $primary-color;
-    background-color: $header-color-a;
     color: $primary-color;
     h2 {
         text-align: center;

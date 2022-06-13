@@ -1,0 +1,13 @@
+@import 'src/components/GlobalStyles/GlobalVariables';
+
+.container {
+    padding-top: $header-height + 30;
+}
+
+.container.minimize {
+    margin-top: $header-height - 10;
+}
+
+.container.marginTop {
+    padding-top: $header-height - 20;
+}

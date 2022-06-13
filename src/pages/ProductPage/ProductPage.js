@@ -36,6 +36,9 @@ const ProductPage = () => {
     const toast = useToast({ newProduct, prevClick: prevClick.current, counter });
 
     useEffect(() => setNewProduct(handleSetProduct), [product]);
+    useEffect(() => {
+        document.title = `${newProduct.title} - Gốm nhà Khuê My`;
+    }, []);
 
     return (
         <div className="wrapper">

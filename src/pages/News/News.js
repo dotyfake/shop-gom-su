@@ -52,6 +52,10 @@ const News = () => {
         window.addEventListener('scroll', trackScrolling);
         return () => window.removeEventListener('scroll', trackScrolling);
     });
+
+    useEffect(() => {
+        document.title = 'Tin mới- Gốm nhà Khuê My';
+    }, []);
     return (
         <div>
             <div className="wide">

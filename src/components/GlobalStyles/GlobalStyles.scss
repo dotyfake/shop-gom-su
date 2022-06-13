@@ -2,6 +2,7 @@
 @import './grid.css';
 @import url('https://fonts.googleapis.com/css2?family=Lato:wght@100;300;400;700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Water+Brush&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&family=Smooch&display=swap');
 @import 'src/components/GlobalStyles/GlobalVariables';
 
 *,
@@ -32,14 +33,6 @@ a {
 
 li {
     list-style: none;
-}
-
-.container {
-    padding-top: $header-height + 30;
-}
-
-.container.minimize {
-    margin-top: $header-height - 10;
 }
 
 .swiper-button-next,

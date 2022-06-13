@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import classNames from 'classnames/bind';
 
 import styles from './Payment.module.scss';
@@ -8,6 +9,10 @@ const cx = classNames.bind(styles);
 const Payment = () => {
     const viewPort = useViewport();
     const isMobile = viewPort.width <= 450;
+
+    useEffect(() => {
+        document.title = 'Thanh toán - Gốm nhà Khuê My';
+    }, []);
 
     return (
         <div className="wide">
