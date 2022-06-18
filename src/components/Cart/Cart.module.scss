@@ -6,6 +6,17 @@
     }
 }
 
+.wrapper-coupon {
+    div {
+        width: 250px;
+        margin-left: auto;
+
+        input {
+            width: 160px;
+        }
+    }
+}
+
 .cart-footer {
     color: $primary-color;
     .item {

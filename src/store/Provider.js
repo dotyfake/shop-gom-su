@@ -19,6 +19,7 @@ const Provider = ({ children }) => {
     useEffect(() => {
         axios('/.netlify/functions/ProductsAPI').then((res) => {
             const db = res.data.results;
+            console.log(db);
             const data = db.map((item) => {
                 const fixDesc = item.properties.Title.rich_text.map((item) => item.plain_text);
                 return {

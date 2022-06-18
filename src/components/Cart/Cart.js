@@ -90,9 +90,11 @@ const Cart = () => {
             </div>
             {!isEmptyCart && (
                 <div className={cx('cart-footer')}>
-                    <div className={cx('item')}>
-                        <input className={cx('coupon')} type="text" placeholder="Nhập mã giảm giá" />
-                        <button>Áp dụng mã </button>
+                    <div className={cx('wrapper-coupon')}>
+                        <div>
+                            <input className={cx('coupon')} type="text" placeholder="Nhập mã giảm giá" />
+                            <button>Áp dụng mã </button>
+                        </div>
                     </div>
                     <div style={{ margin: '10px auto', fontWeight: '500' }}>
                         <span>Tạm tính:</span> <p>{sumPrice.toLocaleString()} vnđ</p>
