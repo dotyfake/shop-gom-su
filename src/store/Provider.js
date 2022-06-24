@@ -25,7 +25,7 @@ const Provider = ({ children }) => {
         signOut(auth).then(() => {
             setIsAuth(false);
             localStorage.removeItem('isAuth');
-            window.location.pathname = '/login';
+            window.location.pathname = '/';
         });
     };
 

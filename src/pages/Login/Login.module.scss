@@ -21,13 +21,23 @@
         border: 2px solid #dce0e3;
         border-radius: 44px;
         color: #333;
-        width: 300px;
+        width: 280px;
         height: 44px;
         font-size: 1.5rem;
         line-height: 44px;
+        position: relative;
         margin-bottom: 10px;
         img {
-            transform: translate(-15px, 3px);
+            position: absolute;
+            top: 50%;
+            left: 20px;
+            transform: translate(0, -50%);
+        }
+        & > span > span {
+            position: absolute;
+            top: 50%;
+            left: 54px;
+            transform: translate(0, -50%);
         }
     }
 }

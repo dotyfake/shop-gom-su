@@ -133,16 +133,18 @@ const Sidebar = () => {
                         >
                             Đóng
                         </Button>
-                        <Button
-                            className={cx('sign-out')}
-                            onClick={() => {
-                                signUserOut();
-                            }}
-                            primary
-                            leftIcon={<FontAwesomeIcon icon={solid('right-from-bracket')} />}
-                        >
-                            Đăng xuất
-                        </Button>
+                        {isAuth && (
+                            <Button
+                                className={cx('sign-out')}
+                                onClick={() => {
+                                    signUserOut();
+                                }}
+                                primary
+                                leftIcon={<FontAwesomeIcon icon={solid('right-from-bracket')} />}
+                            >
+                                Đăng xuất
+                            </Button>
+                        )}
                     </div>
                 </Modal>
             )}

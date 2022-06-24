@@ -39,8 +39,22 @@ const Login = ({ closeSidebar, noOption }) => {
                     render={(attrs) => (
                         <div className={cx('options')} tabIndex="-1" {...attrs}>
                             <ul>
-                                <li onClick={() => navigate('/order')}>Đơn hàng</li>
-                                <li onClick={() => signUserOut()}>Đăng xuất</li>
+                                <li
+                                    onClick={() => {
+                                        navigate('/order');
+                                        setVisible(false);
+                                    }}
+                                >
+                                    Đơn hàng
+                                </li>
+                                <li
+                                    onClick={() => {
+                                        signUserOut();
+                                        setVisible(false);
+                                    }}
+                                >
+                                    Đăng xuất
+                                </li>
                             </ul>
                         </div>
                     )}

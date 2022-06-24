@@ -46,11 +46,11 @@ const Login = () => {
             <h1>Đăng nhập</h1>
             <Button onClick={signInWithGoogle}>
                 <img src="https://accounts.fullstack.edu.vn/assets/images/signin/google-18px.svg" alt="" />
-                Đăng nhập bằng Google
+                <span>Đăng nhập bằng Google</span>
             </Button>
             <Button onClick={signInWithFacebook}>
                 <img src="https://accounts.fullstack.edu.vn/assets/images/signin/facebook-18px.svg" alt="" />
-                Đăng nhập bằng Facebook
+                <span>Đăng nhập bằng Facebook</span>
             </Button>
         </div>
     );

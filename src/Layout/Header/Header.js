@@ -149,8 +149,9 @@ const Header = () => {
                                             />
                                         ))}
                                     </div>
-                                    {!isEmptyCart && (
-                                        <div className={cx('cart-footer')}>
+
+                                    <div className={cx('cart-footer')}>
+                                        {!isEmptyCart && (
                                             <div
                                                 style={{
                                                     margin: '10px auto',
@@ -160,6 +161,8 @@ const Header = () => {
                                             >
                                                 Tổng tiền đơn hàng: {sumPrice.toLocaleString()} vnđ
                                             </div>
+                                        )}
+                                        {!isEmptyCart && (
                                             <Link to="/payment" element={<Payment />}>
                                                 <button
                                                     onClick={() => {
@@ -175,21 +178,21 @@ const Header = () => {
                                                     Thanh toán
                                                 </button>
                                             </Link>
-                                            <button
-                                                onClick={() => {
-                                                    setTimeout(() => setShowModal(false), 200);
-                                                    closeModal.current();
-                                                }}
-                                                style={{ backgroundColor: '#803242' }}
-                                            >
-                                                <FontAwesomeIcon
-                                                    icon={solid('close')}
-                                                    style={{ margin: '0 6px', fontSize: '2.2rem' }}
-                                                />
-                                                Đóng
-                                            </button>
-                                        </div>
-                                    )}
+                                        )}
+                                        <button
+                                            onClick={() => {
+                                                setTimeout(() => setShowModal(false), 200);
+                                                closeModal.current();
+                                            }}
+                                            style={{ backgroundColor: '#803242' }}
+                                        >
+                                            <FontAwesomeIcon
+                                                icon={solid('close')}
+                                                style={{ margin: '0 6px', fontSize: '2.2rem' }}
+                                            />
+                                            Đóng
+                                        </button>
+                                    </div>
                                 </div>
                             </Modal>
                         )}
