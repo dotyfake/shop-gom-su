@@ -42,4 +42,9 @@
     width: 100%;
     display: flex;
     justify-content: center;
+    button {
+        &:first-child {
+            margin-right: 10px;
+        }
+    }
 }

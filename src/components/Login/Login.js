@@ -22,14 +22,7 @@ const Login = ({ closeSidebar, noOption }) => {
     };
 
     return (
-        <div
-            className={cx('wrapper')}
-            onClick={() => {
-                if (!noOption) {
-                    setVisible(!visible);
-                }
-            }}
-        >
+        <div className={cx('wrapper')}>
             {auth ? (
                 <HeadlessTippy
                     visible={visible}
@@ -42,7 +35,6 @@ const Login = ({ closeSidebar, noOption }) => {
                                 <li
                                     onClick={() => {
                                         navigate('/order');
-                                        setVisible(false);
                                     }}
                                 >
                                     Đơn hàng
@@ -50,7 +42,6 @@ const Login = ({ closeSidebar, noOption }) => {
                                 <li
                                     onClick={() => {
                                         signUserOut();
-                                        setVisible(false);
                                     }}
                                 >
                                     Đăng xuất
@@ -59,7 +50,14 @@ const Login = ({ closeSidebar, noOption }) => {
                         </div>
                     )}
                 >
-                    <div className={cx('user')}>
+                    <div
+                        className={cx('user')}
+                        onClick={() => {
+                            if (!noOption) {
+                                setVisible(!visible);
+                            }
+                        }}
+                    >
                         <img src={photo} alt="" />
                         <span>{displayName}</span>
                     </div>
