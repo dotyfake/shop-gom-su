@@ -8,3 +8,4 @@ export { default as Modal } from './Modal/Modal';
 export { default as Cart } from './Cart/Cart';
 export { default as Button } from './Button';
 export { default as Title } from './Title/Title';
+export { default as Login } from './Login/Login';

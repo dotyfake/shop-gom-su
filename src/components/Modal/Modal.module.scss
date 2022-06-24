@@ -30,6 +30,12 @@
     animation: transformLeft 0.2s ease-in-out;
 }
 
+.center {
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+
 .hideRight {
     animation: transformRightOut 0.2s ease-in-out;
 }

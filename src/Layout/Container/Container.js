@@ -1,5 +1,5 @@
 import { Routes, Route } from 'react-router-dom';
-import { Home, Products, News, Contact, ProductPage, Payment } from '~/pages';
+import { Home, Products, News, Contact, ProductPage, Payment, Login, Order } from '~/pages';
 import classNames from 'classnames/bind';
 import styles from './Container.module.scss';
 import { useViewport } from '~/store';
@@ -17,6 +17,8 @@ const Container = () => {
                 <Route path="/news" element={<News />} />
                 <Route path="/contact" element={<Contact />} />
                 <Route path="/payment" element={<Payment />} />
+                <Route path="/login" element={<Login />} />
+                <Route path="/order" element={<Order />} />
             </Routes>
         </div>
     );

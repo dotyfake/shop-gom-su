@@ -10,14 +10,15 @@ import { useViewport } from '~/store';
 
 const cx = classNames.bind(styles);
 
-const Cart = () => {
+const Cart = ({ isOrder, cartOrder, isPayment }) => {
     const viewPort = useViewport();
     const isMobile = viewPort.width <= 1024;
     const [isEmptyCart, setIsEmptyCart] = useState(false);
 
     const { cart, products, setCart, setCounterCart } = useContext(ProviderContext);
 
-    const newCart = cart.map((item) => item.newProduct);
+    const cartProducts = isOrder ? cartOrder : cart;
+    const newCart = cartProducts.map((item) => item.newProduct);
     const ResultCartByIds = products.reduce((acc, item) => {
         if (newCart.includes(item.id)) {
             acc = [...acc, item];
@@ -25,12 +26,12 @@ const Cart = () => {
         return acc;
     }, []);
     const getCartByIds = ResultCartByIds.map((item, i) => {
-        return { newProduct: item, counter: cart[i].counter, price: item.newPrice };
+        return { newProduct: item, counter: cartProducts[i].counter, price: item.newPrice };
     });
 
     const handleSumPrice = () => {
         setSumPrice(
-            cart.reduce((sum, product) => {
+            cartProducts.reduce((sum, product) => {
                 sum += product.counter * product.price;
                 return sum;
             }, 0),
@@ -40,17 +41,16 @@ const Cart = () => {
     const [sumPrice, setSumPrice] = useState(() => {
         return getCartByIds.reduce((sum, product) => {
             sum += product.counter * product.newProduct.newPrice;
-            console.log(product.counter, product.newProduct.newPrice, sum);
             return sum;
         }, 0);
     });
 
-    useEffect(handleSumPrice, [cart, sumPrice]);
+    useEffect(handleSumPrice, [cartProducts, sumPrice]);
 
     useEffect(() => {
-        setCounterCart(cart.length);
-        setIsEmptyCart(cart.length === 0);
-    }, [cart, setCounterCart]);
+        setCounterCart(cartProducts.length);
+        setIsEmptyCart(cartProducts.length === 0);
+    }, [cartProducts, setCounterCart]);
 
     return (
         <div className={cx('cart-result')}>
@@ -65,7 +65,7 @@ const Cart = () => {
                     <Product
                         noPrice
                         height="100px"
-                        isPayment
+                        isPayment={isPayment}
                         index={i}
                         key={i}
                         type="CART-PRODUCT"
@@ -85,16 +85,19 @@ const Cart = () => {
                             setCart(c);
                         }}
                         setSumPrice={handleSumPrice}
+                        isOrder={isOrder}
                     />
                 ))}
             </div>
             {!isEmptyCart && (
                 <div className={cx('cart-footer')}>
                     <div className={cx('wrapper-coupon')}>
-                        <div>
-                            <input className={cx('coupon')} type="text" placeholder="Nhập mã giảm giá" />
-                            <button>Áp dụng mã </button>
-                        </div>
+                        {!isOrder && (
+                            <div>
+                                <input className={cx('coupon')} type="text" placeholder="Nhập mã giảm giá" />
+                                <button>Áp dụng mã </button>
+                            </div>
+                        )}
                     </div>
                     <div style={{ margin: '10px auto', fontWeight: '500' }}>
                         <span>Tạm tính:</span> <p>{sumPrice.toLocaleString()} vnđ</p>

@@ -4,3 +4,5 @@ export { default as ProductPage } from './ProductPage/ProductPage';
 export { default as News } from './News/News';
 export { default as Contact } from './Contact/Contact';
 export { default as Payment } from './Payment/Payment';
+export { default as Login } from './Login/Login';
+export { default as Order } from './Order/Order';

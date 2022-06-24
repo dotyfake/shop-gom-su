@@ -37,7 +37,7 @@ const ProductPage = () => {
 
     useEffect(() => setNewProduct(handleSetProduct), [product]);
     useEffect(() => {
-        document.title = `${newProduct.title} - Gốm nhà Khuê My`;
+        document.title = `${newProduct?.title} - Gốm nhà Khuê My`;
     }, []);
 
     return (

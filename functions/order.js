@@ -7,7 +7,7 @@ const notion = new Client({
 exports.handler = async (event) => {
     const form = JSON.parse(event.body);
 
-    const { name, phone, address, note, cart } = form;
+    const { name, phone, address, note, cart, accountName, email, id } = form;
     const cartProducts = cart.map((item) => {
         return { counter: item.counter, price: item.price, id: item.newProduct };
     });
@@ -20,7 +20,7 @@ exports.handler = async (event) => {
                         {
                             type: 'text',
                             text: {
-                                content: 'Số thứ tự',
+                                content: `STT`,
                                 link: null,
                             },
                             annotations: {
@@ -271,6 +271,42 @@ exports.handler = async (event) => {
                         },
                     ],
                 },
+                DisplayName: {
+                    rich_text: [
+                        {
+                            text: {
+                                content: accountName,
+                            },
+                        },
+                    ],
+                },
+                ArrayCart: {
+                    rich_text: [
+                        {
+                            text: {
+                                content: JSON.stringify(cart),
+                            },
+                        },
+                    ],
+                },
+                ID: {
+                    rich_text: [
+                        {
+                            text: {
+                                content: id,
+                            },
+                        },
+                    ],
+                },
+                Email: {
+                    rich_text: [
+                        {
+                            text: {
+                                content: email,
+                            },
+                        },
+                    ],
+                },
                 Phone: {
                     number: phone,
                 },
@@ -389,6 +425,7 @@ exports.handler = async (event) => {
         });
         return {
             statusCode: 200,
+            body: JSON.stringify(event),
         };
     } catch (error) {
         console.log(error);

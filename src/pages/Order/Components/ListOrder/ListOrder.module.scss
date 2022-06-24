@@ -1,0 +1,56 @@
+@import 'src/components/GlobalStyles/GlobalVariables';
+
+.order-product {
+    max-width: calc(100vw - 32px);
+    margin: 0 auto;
+    background-color: #fff;
+    width: 800px;
+    border-radius: 6px;
+    cursor: pointer;
+    margin-bottom: 10px;
+    .info {
+        padding: 20px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        .left {
+            .title {
+                color: $primary-color;
+                font-weight: 600;
+                margin-bottom: 4px;
+            }
+        }
+        .right {
+            display: flex;
+            .status {
+                display: flex;
+                align-items: center;
+
+                span {
+                    margin-left: 5px;
+                }
+            }
+            .show {
+                display: flex;
+                align-items: center;
+                margin-left: 10px;
+            }
+        }
+    }
+    .list-products {
+        padding: 0 20px 20px 20px;
+
+        h2 {
+            color: $primary-color;
+            text-align: center;
+        }
+
+        li {
+            margin-bottom: 5px;
+        }
+
+        h3 {
+            color: $primary-color;
+        }
+    }
+}

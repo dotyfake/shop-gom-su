@@ -10,7 +10,7 @@ import Search from './components/Search/Search';
 import Navbar from './components/Navbar/Navbar';
 import Sidebar from './components/Sidebar/Sidebar';
 import images from '~/assets/images/';
-import { Product, Modal, Button } from '~/components';
+import { Product, Modal, Login } from '~/components';
 import { ProviderContext } from '~/store';
 import { useViewport } from '~/store';
 
@@ -94,10 +94,9 @@ const Header = () => {
                         </div>
                     )}
                     <div className={cx('right')}>
-                        {/* <div className={minimizeHeader ? 'hide' : 'login'}>
-                            <button>Đăng nhập</button>
-                        </div> */}
-
+                        <div className={isTablet || minimizeHeader ? 'hide' : 'login'}>
+                            <Login />
+                        </div>
                         <div
                             className={cx('cart')}
                             onClick={() => {
@@ -109,6 +108,7 @@ const Header = () => {
                                 <FontAwesomeIcon icon={solid('basket-shopping')} />
                             </button>
                         </div>
+
                         {showModal && (
                             <Modal
                                 width={isMobile ? '100vw' : '400px'}

@@ -1,6 +1,8 @@
 import Context from '~/store/Context';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
+import { auth } from '~/Firebase/firebase-config';
+import { signOut } from 'firebase/auth';
 const Provider = ({ children }) => {
     const [products, setProducts] = useState([]);
     const [product, setProduct] = useState(() => {
@@ -15,11 +17,21 @@ const Provider = ({ children }) => {
     const [searchProducts, setSearchProducts] = useState([]);
     const [productsState, setProductsState] = useState([]);
     const [counterCart, setCounterCart] = useState(0);
+    const [isAuth, setIsAuth] = useState(() => {
+        return JSON.parse(localStorage.getItem('isAuth'));
+    });
+
+    const signUserOut = () => {
+        signOut(auth).then(() => {
+            setIsAuth(false);
+            localStorage.removeItem('isAuth');
+            window.location.pathname = '/login';
+        });
+    };
 
     useEffect(() => {
         axios('/.netlify/functions/ProductsAPI').then((res) => {
             const db = res.data.results;
-            console.log(db);
             const data = db.map((item) => {
                 const fixDesc = item.properties.Title.rich_text.map((item) => item.plain_text);
                 return {
@@ -56,6 +68,9 @@ const Provider = ({ children }) => {
                 setCart,
                 counterCart,
                 setCounterCart,
+                isAuth,
+                setIsAuth,
+                signUserOut,
             }}
         >
             {children}

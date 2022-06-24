@@ -5,7 +5,7 @@ import styles from './Modal.module.scss';
 
 const cx = classNames.bind(styles);
 
-const Modal = ({ children, width, left, right, setShowModal }, ref) => {
+const Modal = ({ children, width, height, left, right, setShowModal, center }, ref) => {
     const [show, setShow] = useState(false);
     useImperativeHandle(ref, () => handleShow);
     const handleShow = () => {
@@ -22,9 +22,11 @@ const Modal = ({ children, width, left, right, setShowModal }, ref) => {
                     hideLeft: show && left,
                     left,
                     right,
+                    center,
                 })}
                 style={{
                     width: `${width}`,
+                    height: `${height}`,
                 }}
             >
                 {children}

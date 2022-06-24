@@ -69,7 +69,16 @@
 }
 
 .right {
+    height: 100%;
+    margin: auto 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    position: relative;
+
     .cart {
+        text-align: center;
         & > button {
             color: $primary-color;
             background-color: transparent;

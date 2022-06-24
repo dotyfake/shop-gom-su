@@ -25,6 +25,7 @@ const Product = ({
     height,
     fixImgMobile,
     noPrice,
+    isOrder,
 }) => {
     const { setProduct, setWatched, setCart, cart } = useContext(ProviderContext);
     const [currentCounter, setCurrentCounter] = useState(counter);
@@ -249,58 +250,62 @@ const Product = ({
                         >
                             <div className={cx('search-name')}>{props.title}</div>
                         </Link>
-                        {!noPrice && <div className={cx('search-price')}>{props.newPrice.toLocaleString()} vnđ</div>}
+                        <div className={cx('search-price')}>{props.newPrice.toLocaleString()} vnđ</div>
                         <div className={cx('counter')}>
                             Số lượng:
-                            <button
-                                className={cx('down')}
-                                onClick={() => {
-                                    if (counter > 0) {
+                            {!isOrder && (
+                                <button
+                                    className={cx('down')}
+                                    onClick={() => {
+                                        if (counter > 0) {
+                                            setCart((prev) => {
+                                                let currentProduct = prev[index];
+                                                if (currentProduct.counter > 1) {
+                                                    currentProduct.counter -= 1;
+                                                }
+                                                setCurrentCounter(currentProduct.counter);
+                                                setCurrentSumPrice(currentProduct.counter * props.newPrice);
+                                                setSumPrice();
+                                                prev.splice(index, 1, currentProduct);
+                                                return prev;
+                                            });
+                                        }
+                                    }}
+                                >
+                                    <span>-</span>
+                                </button>
+                            )}
+                            <div className={cx('value')}>{currentCounter.toLocaleString()}</div>
+                            {!isOrder && (
+                                <button
+                                    className={cx('up')}
+                                    onClick={() => {
+                                        const abc = cart.reduce((acc, item) => {
+                                            acc += item.newProduct.newPrice * item.counter;
+                                            return acc;
+                                        }, 0);
+
                                         setCart((prev) => {
                                             let currentProduct = prev[index];
-                                            if (currentProduct.counter > 1) {
-                                                currentProduct.counter -= 1;
-                                            }
+                                            currentProduct.counter += 1;
+                                            prev.splice(index, 1, currentProduct);
                                             setCurrentCounter(currentProduct.counter);
                                             setCurrentSumPrice(currentProduct.counter * props.newPrice);
                                             setSumPrice();
-                                            prev.splice(index, 1, currentProduct);
+                                            localStorage.setItem('cart', JSON.stringify(prev));
                                             return prev;
                                         });
-                                    }
-                                }}
-                            >
-                                <span>-</span>
-                            </button>
-                            <div className={cx('value')}>{currentCounter.toLocaleString()}</div>
-                            <button
-                                className={cx('up')}
-                                onClick={() => {
-                                    const abc = cart.reduce((acc, item) => {
-                                        acc += item.newProduct.newPrice * item.counter;
-                                        return acc;
-                                    }, 0);
-
-                                    setCart((prev) => {
-                                        let currentProduct = prev[index];
-                                        currentProduct.counter += 1;
-                                        prev.splice(index, 1, currentProduct);
-                                        setCurrentCounter(currentProduct.counter);
-                                        setCurrentSumPrice(currentProduct.counter * props.newPrice);
-                                        setSumPrice();
-                                        localStorage.setItem('cart', JSON.stringify(prev));
-                                        return prev;
-                                    });
-                                }}
-                            >
-                                <span>+</span>
-                            </button>
+                                    }}
+                                >
+                                    <span>+</span>
+                                </button>
+                            )}
                         </div>
                         <span style={{ fontWeight: '500', color: '#444' }}>
                             {!noPrice && 'Thành tiền:'} {currentSumPrice.toLocaleString()} vnđ
                         </span>
                     </div>
-                    {!isPayment && (
+                    {!isPayment + !isOrder > 1 && (
                         <button
                             className={cx('delete')}
                             onClick={() => {

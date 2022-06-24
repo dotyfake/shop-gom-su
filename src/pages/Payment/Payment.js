@@ -3,7 +3,7 @@ import classNames from 'classnames/bind';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
-
+import { useNavigate } from 'react-router-dom';
 import styles from './Payment.module.scss';
 import { Cart } from '~/components';
 import { useViewport } from '~/store';
@@ -13,7 +13,7 @@ const schema = yup.object().shape({
     name: yup.string().required('Vui lòng nhập Họ và tên.').max(50, 'Họ và tên có tối đa 50 ký tự.'),
     phone: yup
         .number()
-        .typeError('Hãy nhập để nhận hàng (Chỉ nhận ký tự số).')
+        .typeError('Vui lòng nhập số điện thoại để nhận hàng (Chỉ nhận ký tự số).')
         .required('Vui lòng nhập số điện thoại.'),
     address: yup.string().required('Vui lòng nhập địa chỉ nhận hàng.').min(16, 'Địa chỉ nhận hàng tối thiểu 16 ký tự.'),
 });
@@ -22,10 +22,14 @@ const cx = classNames.bind(styles);
 const Payment = () => {
     const viewPort = useViewport();
     const isMobile = viewPort.width <= 450;
-    const [name, setName] = useState('');
-    const [text, setText] = useState('');
 
-    const { cart } = useContext(ProviderContext);
+    const navigate = useNavigate();
+
+    const { cart, isAuth } = useContext(ProviderContext);
+
+    const displayName = localStorage.getItem('authName');
+    const email = localStorage.getItem('authEmail');
+    const id = localStorage.getItem('authId');
 
     const api = `/.netlify/functions/order`;
 
@@ -37,21 +41,27 @@ const Payment = () => {
     } = useForm({ resolver: yupResolver(schema) });
 
     const onOrderSubmit = (data) => {
-        console.log(data);
-        fetch(api, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                Accept: 'application/json',
-            },
-            body: JSON.stringify({
-                name: data.name,
-                phone: data.phone,
-                address: data.address,
-                note: data.note,
-                cart: cart,
-            }),
-        });
+        if (isAuth) {
+            fetch(api, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    Accept: 'application/json',
+                },
+                body: JSON.stringify({
+                    name: data.name,
+                    accountName: displayName,
+                    phone: data.phone,
+                    address: data.address,
+                    note: data.note,
+                    cart: cart,
+                    email,
+                    id,
+                }),
+            });
+        } else {
+            navigate('/login');
+        }
     };
     useEffect(() => {
         document.title = 'Thanh toán - Gốm nhà Khuê My';
@@ -66,7 +76,7 @@ const Payment = () => {
                         <div className={cx('cart')}>
                             <h3 className={cx('title')}>Sản phẩm chọn mua</h3>
                             <div className={cx('list-products')}>
-                                <Cart />
+                                <Cart isPayment />
                             </div>
                         </div>
                     </div>
@@ -88,6 +98,7 @@ const Payment = () => {
                                         />
                                     </div>
                                     {errors.name && <p className="error">{errors.name?.message}</p>}
+
                                     <div className={cx('phone', 'item')} style={{ display: isMobile && 'block' }}>
                                         <label>Điện thoại:</label>
                                         <input
@@ -101,6 +112,7 @@ const Payment = () => {
                                         />
                                     </div>
                                     {errors.phone && <p className="error">{errors.phone?.message}</p>}
+
                                     <div className={cx('address', 'item')} style={{ display: isMobile && 'block' }}>
                                         <label>Địa chỉ:</label>
                                         <input
@@ -113,6 +125,7 @@ const Payment = () => {
                                         />
                                     </div>
                                     {errors.address && <p className="error">{errors.address?.message}</p>}
+
                                     <div className={cx('note', 'item')} style={{ display: isMobile && 'block' }}>
                                         <label>Ghi chú:</label>
                                         <textarea
