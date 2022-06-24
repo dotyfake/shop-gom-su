@@ -1,5 +1,5 @@
 import { useState, useEffect, useContext, useRef } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import classNames from 'classnames/bind';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { solid } from '@fortawesome/fontawesome-svg-core/import.macro';
@@ -25,8 +25,10 @@ const Header = () => {
     const [isEmptyCart, setIsEmptyCart] = useState(false);
     const [showModal, setShowModal] = useState(false);
 
-    const { cart, products, setCart, counterCart, setCounterCart } = useContext(ProviderContext);
+    const { cart, products, setCart, counterCart, setCounterCart, isAuth } = useContext(ProviderContext);
     const closeModal = useRef();
+
+    const navigate = useNavigate();
 
     const newCart = cart.map((item) => item.newProduct);
     const ResultCartByIds = products.reduce((acc, item) => {
@@ -166,9 +168,13 @@ const Header = () => {
                                             <Link to="/payment" element={<Payment />}>
                                                 <button
                                                     onClick={() => {
-                                                        setTimeout(() => setShowModal(false), 200);
-                                                        closeModal.current();
-                                                        window.scroll(0, 0);
+                                                        if (isAuth) {
+                                                            setTimeout(() => setShowModal(false), 200);
+                                                            closeModal.current();
+                                                            window.scroll(0, 0);
+                                                        } else {
+                                                            navigate('/login');
+                                                        }
                                                     }}
                                                 >
                                                     <FontAwesomeIcon

@@ -48,8 +48,8 @@ const Cart = ({ isOrder, cartOrder, isPayment }) => {
     useEffect(handleSumPrice, [cartProducts, sumPrice]);
 
     useEffect(() => {
-        setCounterCart(cartProducts.length);
-        setIsEmptyCart(cartProducts.length === 0);
+        setCounterCart(cart.length);
+        setIsEmptyCart(cart.length === 0);
     }, [cartProducts, setCounterCart]);
 
     return (
