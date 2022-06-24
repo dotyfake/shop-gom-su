@@ -7,6 +7,8 @@ import images from '~/assets/images/';
 import { Product } from '~/components';
 import { ProviderContext } from '~/store';
 import { useViewport } from '~/store';
+import { Link } from 'react-router-dom';
+import { Products } from '~/pages';
 
 const cx = classNames.bind(styles);
 
@@ -54,9 +56,16 @@ const Cart = ({ isOrder, cartOrder, isPayment }) => {
 
     return (
         <div className={cx('cart-result')}>
-            {isEmptyCart && (
+            {isEmptyCart + isOrder < 2 && (
                 <div className={cx('empty-cart')}>
                     Giỏ hàng trống
+                    <p>
+                        Để tiếp tục mua sắm xin hãy ấn vào{' '}
+                        <Link to="/products" element={<Products />}>
+                            đây
+                        </Link>
+                        .
+                    </p>
                     <img src={images.emptyCart} alt="Empty cart" />
                 </div>
             )}
@@ -89,7 +98,7 @@ const Cart = ({ isOrder, cartOrder, isPayment }) => {
                     />
                 ))}
             </div>
-            {!isEmptyCart && (
+            {!isEmptyCart + isOrder > 0 && (
                 <div className={cx('cart-footer')}>
                     <div className={cx('wrapper-coupon')}>
                         {!isOrder && (

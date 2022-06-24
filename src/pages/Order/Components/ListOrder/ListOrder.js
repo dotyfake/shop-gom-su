@@ -18,7 +18,7 @@ const ListOrder = ({ data }) => {
             statusOrder = { content: 'Đang vận chuyển', color: '#325080' };
             break;
         case 'Success':
-            statusOrder = { content: 'Đã nhận hàng', color: 'green' };
+            statusOrder = { content: 'Đã nhận hàng', color: '#4BB543' };
             break;
         default:
             break;

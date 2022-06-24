@@ -96,10 +96,12 @@
         .empty-cart {
             text-align: center;
             color: $text-color;
-            font-weight: 600;
             font-size: 1.6rem;
             padding: 40px;
             padding-top: 20px;
+            a {
+                color: $primary-color;
+            }
         }
     }
     .cart-icon {

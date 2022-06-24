@@ -24,6 +24,7 @@ const images = {
     am: require('~/assets/images/products/am.jpg'),
     all: require('~/assets/images/products/all.jpg'),
     emptyCart: require('~/assets/images/empty-cart.svg').default,
+    cartSuccess: require('~/assets/images/cart-success.svg').default,
 };
 
 export default images;

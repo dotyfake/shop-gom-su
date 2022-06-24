@@ -6,3 +6,4 @@ export { default as Contact } from './Contact/Contact';
 export { default as Payment } from './Payment/Payment';
 export { default as Login } from './Login/Login';
 export { default as Order } from './Order/Order';
+export { default as Success } from './Success/Success';

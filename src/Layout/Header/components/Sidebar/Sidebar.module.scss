@@ -38,11 +38,12 @@
 
 .footer {
     position: absolute;
-    bottom: 10px;
+    bottom: 20px;
     width: 100%;
     display: flex;
     justify-content: center;
     button {
+        width: 33%;
         &:first-child {
             margin-right: 10px;
         }

@@ -19,7 +19,7 @@ const Order = () => {
                     const event = new Date(item.created_time);
                     return {
                         id: item.id,
-                        date: event.toLocaleString('vi-VN', { timeZone: 'GMT' }),
+                        date: event.toLocaleString('vi-VN'),
                         title: item.properties.Name.title[0].plain_text,
                         address: item.properties.Address.rich_text[0].plain_text,
                         arrayCart: JSON.parse(item.properties.ArrayCart.rich_text[0].plain_text),

@@ -4,7 +4,7 @@ import classNames from 'classnames/bind';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { solid } from '@fortawesome/fontawesome-svg-core/import.macro';
 
-import { Home, Payment } from '~/pages';
+import { Home, Products } from '~/pages';
 import styles from './Header.module.scss';
 import Search from './components/Search/Search';
 import Navbar from './components/Navbar/Navbar';
@@ -123,6 +123,13 @@ const Header = () => {
                                     {isEmptyCart && (
                                         <div className={cx('empty-cart')}>
                                             Giỏ hàng trống
+                                            <p>
+                                                Để tiếp tục mua sắm xin hãy ấn vào{' '}
+                                                <Link to="/products" element={<Products />}>
+                                                    đây
+                                                </Link>
+                                                .
+                                            </p>
                                             <img src={images.emptyCart} alt="Empty cart" />
                                         </div>
                                     )}
@@ -165,25 +172,26 @@ const Header = () => {
                                             </div>
                                         )}
                                         {!isEmptyCart && (
-                                            <Link to="/payment" element={<Payment />}>
-                                                <button
-                                                    onClick={() => {
-                                                        if (isAuth) {
-                                                            setTimeout(() => setShowModal(false), 200);
-                                                            closeModal.current();
-                                                            window.scroll(0, 0);
-                                                        } else {
-                                                            navigate('/login');
-                                                        }
-                                                    }}
-                                                >
-                                                    <FontAwesomeIcon
-                                                        icon={solid('cart-shopping')}
-                                                        style={{ margin: '0 6px', fontSize: '2.2rem' }}
-                                                    />
-                                                    Thanh toán
-                                                </button>
-                                            </Link>
+                                            <button
+                                                onClick={() => {
+                                                    if (isAuth) {
+                                                        setTimeout(() => setShowModal(false), 200);
+                                                        closeModal.current();
+                                                        window.scroll(0, 0);
+                                                        navigate('/payment');
+                                                    } else {
+                                                        closeModal.current();
+                                                        window.scroll(0, 0);
+                                                        navigate('/login');
+                                                    }
+                                                }}
+                                            >
+                                                <FontAwesomeIcon
+                                                    icon={solid('cart-shopping')}
+                                                    style={{ margin: '0 6px', fontSize: '2.2rem' }}
+                                                />
+                                                Thanh toán
+                                            </button>
                                         )}
                                         <button
                                             onClick={() => {

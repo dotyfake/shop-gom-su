@@ -10,7 +10,7 @@ import 'swiper/css/navigation';
 import 'swiper/css/thumbs';
 import styles from './ProductPage.module.scss';
 import { ProviderContext } from '~/store';
-import { Product } from '~/components';
+import { Product, PagesTree } from '~/components';
 import { useToast } from '~/store';
 import { useViewport } from '~/store';
 
@@ -44,6 +44,7 @@ const ProductPage = () => {
         <div className="wrapper">
             {useToast(prevClick)}
             <div className="wide">
+                <PagesTree page={newProduct?.title} />
                 {newProduct && (
                     <div className="row">
                         <div className={cx('col l-8 m-8 c-12')}>

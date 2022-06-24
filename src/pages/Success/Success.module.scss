@@ -1,0 +1,26 @@
+@import 'src/components/GlobalStyles/GlobalVariables';
+
+.wrapper {
+    background-color: $white-color;
+    max-width: calc(100vw - 32px);
+    margin: 0 auto;
+    width: 600px;
+    min-height: 60vh;
+    border-radius: 6px;
+    margin-bottom: 30px;
+    text-align: center;
+    padding: 20px;
+    .header {
+        svg {
+            width: 230px;
+            fill: #4bb543;
+        }
+    }
+
+    span {
+        font-weight: 700;
+    }
+    a {
+        color: #4bb543;
+    }
+}

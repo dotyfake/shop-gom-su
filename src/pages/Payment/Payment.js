@@ -25,7 +25,7 @@ const Payment = () => {
 
     const navigate = useNavigate();
 
-    const { cart, isAuth } = useContext(ProviderContext);
+    const { cart, setCart, isAuth } = useContext(ProviderContext);
 
     const displayName = localStorage.getItem('authName');
     const email = localStorage.getItem('authEmail');
@@ -59,6 +59,9 @@ const Payment = () => {
                     id,
                 }),
             });
+            setCart([]);
+            localStorage.setItem('cart', '[]');
+            navigate('/success');
         } else {
             navigate('/login');
         }

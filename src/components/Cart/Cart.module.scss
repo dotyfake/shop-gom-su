@@ -6,6 +6,13 @@
     }
 }
 
+.empty-cart {
+    text-align: center;
+    a {
+        color: $primary-color;
+    }
+}
+
 .wrapper-coupon {
     div {
         width: 250px;
