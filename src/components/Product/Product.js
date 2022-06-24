@@ -145,7 +145,7 @@ const Product = ({
                     to="/productPage"
                     element={<ProductPage />}
                     onClick={() => {
-                        closeSidebar();
+                        closeSidebar && closeSidebar();
                         hide();
                         setProduct(() => {
                             localStorage.setItem('product', JSON.stringify(props.id));

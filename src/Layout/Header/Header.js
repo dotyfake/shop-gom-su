@@ -125,7 +125,11 @@ const Header = () => {
                                             Giỏ hàng trống
                                             <p>
                                                 Để tiếp tục mua sắm xin hãy ấn vào{' '}
-                                                <Link to="/products" element={<Products />}>
+                                                <Link
+                                                    to="/products"
+                                                    element={<Products />}
+                                                    onClick={() => closeModal.current()}
+                                                >
                                                     đây
                                                 </Link>
                                                 .

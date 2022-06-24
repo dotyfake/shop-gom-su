@@ -51,12 +51,12 @@ const Cart = ({ isOrder, cartOrder, isPayment }) => {
 
     useEffect(() => {
         setCounterCart(cart.length);
-        setIsEmptyCart(cart.length === 0);
+        setIsEmptyCart(cartProducts.length === 0);
     }, [cartProducts, setCounterCart]);
 
     return (
         <div className={cx('cart-result')}>
-            {isEmptyCart + isOrder < 2 && (
+            {isEmptyCart + isOrder > 1 && (
                 <div className={cx('empty-cart')}>
                     Giỏ hàng trống
                     <p>
@@ -98,7 +98,7 @@ const Cart = ({ isOrder, cartOrder, isPayment }) => {
                     />
                 ))}
             </div>
-            {!isEmptyCart + isOrder > 0 && (
+            {!isEmptyCart && (
                 <div className={cx('cart-footer')}>
                     <div className={cx('wrapper-coupon')}>
                         {!isOrder && (

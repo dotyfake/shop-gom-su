@@ -32,7 +32,6 @@ export const useToast = ({ newProduct, counter = 1 }) => {
             });
         } else {
             setCart((prev) => {
-                console.log(newProduct);
                 const result = [...prev, { counter: counter, newProduct: newProduct.id, price: newProduct.newPrice }];
                 localStorage.setItem('cart', JSON.stringify(result));
                 return result;

@@ -15,7 +15,7 @@ import { ProviderContext } from '~/store';
 import { Products } from '~/pages';
 import { useViewport } from '~/store';
 
-const Search = ({ mini, width = `450px`, closeSidebar }) => {
+const Search = ({ mini, width = `450px`, closeSidebar, isSideBar }) => {
     const viewPort = useViewport();
     const isTablet = viewPort.width <= 1100;
     const isMobile = viewPort.width <= 740;
@@ -92,7 +92,7 @@ const Search = ({ mini, width = `450px`, closeSidebar }) => {
                                     } else {
                                         setProductsState(searchProducts);
                                     }
-                                    closeSidebar();
+                                    closeSidebar && closeSidebar();
                                     hide();
                                     navigate('/products');
                                 }

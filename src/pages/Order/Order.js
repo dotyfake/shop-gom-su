@@ -39,6 +39,7 @@ const Order = () => {
 
     return (
         <div className={cx('wrapper')}>
+            {data.length === 0 && <h4>Bạn chưa có đơn hàng nào</h4>}
             <div className="wide">
                 {data.map((item, i) => (
                     <div key={i}>

@@ -88,7 +88,7 @@ const Sidebar = () => {
                         </Link>
                     </div>
                     <Login closeSidebar={closeSidebar} noOption />
-                    <Search width="350px" closeSidebar={closeSidebar} />
+                    <Search width="350px" closeSidebar={closeSidebar} isSideBar />
                     <ul>
                         {navbar.map(
                             (item, i) =>
