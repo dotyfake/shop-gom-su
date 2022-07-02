@@ -78,7 +78,7 @@ const Header = () => {
         };
         window.addEventListener('scroll', handleMinimize);
     }, []);
-
+    console.log(getCartByIds);
     return (
         <div className={cx({ wrapper: !minimizeHeader }, { minimize: isMobile || minimizeHeader })}>
             <div className="wide">
@@ -154,7 +154,6 @@ const Header = () => {
                                                             price: item.price,
                                                         };
                                                     });
-                                                    console.log(c);
                                                     localStorage.setItem('cart', JSON.stringify(c));
                                                     setCart(c);
                                                 }}

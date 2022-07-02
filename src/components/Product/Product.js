@@ -8,6 +8,7 @@ import { ProviderContext } from '~/store';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { solid } from '@fortawesome/fontawesome-svg-core/import.macro';
 import { useViewport } from '~/store';
+import { LazyLoadComponent, trackWindowScroll } from 'react-lazy-load-image-component';
 
 const cx = classNames.bind(styles);
 
@@ -52,8 +53,7 @@ const Product = ({
     switch (type) {
         case 'DEFAULT_PRODUCT':
             return (
-                <>
-                    {<div></div>}
+                <LazyLoadComponent>
                     <div
                         className={cx('wrapper')}
                         style={{
@@ -111,7 +111,6 @@ const Product = ({
                                     )}
                                     <div
                                         onClick={(e) => {
-                                            console.log('abc');
                                             if (e.nativeEvent.timeStamp - prevClick.current > 1200) {
                                                 const cartOnlyId = cart.map((item) => item.newProduct);
                                                 if (!cartOnlyId.includes(props.id)) {
@@ -137,7 +136,7 @@ const Product = ({
                             {props.status.includes('Luxury Product') && !isTablet && <span>Sản phẩm cao cấp</span>}
                         </div>
                     </div>
-                </>
+                </LazyLoadComponent>
             );
         case 'SEARCH_PRODUCT':
             return (
@@ -309,8 +308,8 @@ const Product = ({
                         <button
                             className={cx('delete')}
                             onClick={() => {
-                                setCart();
                                 event();
+                                setCurrentSumPrice(cart[index].price * cart[index].counter);
                             }}
                         >
                             <FontAwesomeIcon className={cx('trash')} icon={solid('trash')} />
@@ -328,4 +327,4 @@ const Product = ({
     }
 };
 
-export default Product;
+export default trackWindowScroll(Product);
