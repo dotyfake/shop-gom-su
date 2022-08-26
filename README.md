@@ -7,6 +7,9 @@ Dự án là một webapp thương mại điện tử thủ công mỹ nghệ, g
 -   Tra cứu sản phẩm trên trang chủ.
 -   Tra cứu sản phẩm qua chức năng tìm kiếm.
 -   Lọc sản phẩm theo loại.
+-   Đăng nhập.
+-   Quản lý đơn hàng.
+-   Mua hàng trực tiếp trên website.
 -   ...
 
 ---
@@ -22,9 +25,10 @@ Dự án là một webapp thương mại điện tử thủ công mỹ nghệ, g
 -   SEO với thư viện react-helmet.
 -   Slide sử dụng thư viện swiper.
 -   Toast sử dụng thư viện react-toastify
--   Icon sử dụng react-icons.
+-   Icon sử dụng fortawesome.
 -   Popper và tooltip sử dụng tippyjs.
-
+-   Validate form với thư viện react-hook-form và yup.
+-   Authentication với firebase.
 ### State management
 
 -   State management sử dụng contextAPI.
