@@ -13,7 +13,7 @@ Dự án là một webapp thương mại điện tử thủ công mỹ nghệ, g
 -   ...
 
 ---
-
+## Link demo: https://gomsu.tk/
 ## Công nghệ sử dụng trong dự án
 
 ### Frontend
